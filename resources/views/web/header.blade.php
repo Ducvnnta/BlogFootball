@@ -41,6 +41,16 @@
       <div class="my-2 my-lg-0">
         <button class="btn btn-search btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
       </div>
+      <div>
+        <a href="{{route('auth.login')}}">
+            <div class=" box-1">
+                <div class="btn btn-one">
+                    <span>Tài khoản</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    </div>
 
     </div>
     </div>
@@ -50,7 +60,10 @@
       <form class="search-form" role="search" method="GET" id="key" action="{{ route('home.search') }}">
           <input class="form-inline" type="text" name="keyword" placeholder="Tìm Kiếm">
       </form>
+
     </div>
+
+
     <div class="intro">
         <div class="container">
             <div class="row">

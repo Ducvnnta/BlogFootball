@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -37,7 +37,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center">
+            <div class="card-header text-center " href="{{route('web.home')}}">
               <img class="logo-img mb-2" src="backend/images/logo_1.png" alt="logo" height="50">
               <span class="splash-description">Please enter your user information.</span>
             </div>
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-  
+
     <!-- ============================================================== -->
     <!-- end login page  -->
     <!-- ============================================================== -->
@@ -63,5 +63,5 @@
     <script src="backend/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="backend/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
- 
+
 </html>
