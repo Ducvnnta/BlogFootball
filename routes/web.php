@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaptureController;
 use App\Http\Controllers\web\CategoryController;
@@ -33,7 +34,12 @@ Route::get('ranknew', function () {
     return view("web.news.rank");
 });
 
-Route::get('/',  [HomeController::class, 'titlehot']);
+Route::get('register', function () {
+    return view('web.news.register');
+})->name('auth.login');
+
+
+Route::get('/',  [HomeController::class, 'titlehot'])->name('web.home');
 
 Route::get('/tin-tuc/{id}', [NewController::class, 'show'])->name('web.news.show');
 
@@ -42,6 +48,10 @@ Route::get('/bang-xep-hang/{id}',[RankController::class, 'rankdetail'])->name('w
 Route::get('/lich-thi-dau/{id}',[ScheduleController::class, 'scheduledetail'])->name('web.news.schedule');
 
 Route::get('/giai-dau/{id}', [CategoryController::class, 'categorydetail'])->name('web.news.category');
+
+Route::post('/register', [AuthController::class, 'register'])->name('user.registration');
+Route::get('/registration', [AuthController::class, 'registration'])->name('auth.login');
+
 
 Route::get('/search',  [HomeController::class, 'getSearch'])->name('home.search');
 
