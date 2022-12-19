@@ -36,7 +36,7 @@ Route::get('ranknew', function () {
 
 Route::get('register', function () {
     return view('web.news.register');
-})->name('auth.login');
+})->name('auth.register');
 
 
 Route::get('/',  [HomeController::class, 'titlehot'])->name('web.home');
@@ -50,8 +50,9 @@ Route::get('/lich-thi-dau/{id}',[ScheduleController::class, 'scheduledetail'])->
 Route::get('/giai-dau/{id}', [CategoryController::class, 'categorydetail'])->name('web.news.category');
 
 Route::post('/register', [AuthController::class, 'register'])->name('user.registration');
-Route::get('/registration', [AuthController::class, 'registration'])->name('auth.login');
+Route::get('/registration', [AuthController::class, 'registration'])->name('auth.register');
 
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 
 Route::get('/search',  [HomeController::class, 'getSearch'])->name('home.search');
 

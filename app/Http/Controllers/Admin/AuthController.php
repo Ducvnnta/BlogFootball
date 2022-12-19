@@ -6,17 +6,36 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Models\User;
+use App\Repositories\User\UserRepositoryInterface;
+use App\Services\User\UserServiceInterface;
+use App\Traits\ApiResponser;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class AuthController extends BaseController
 {
+    use ApiResponser;
+
+    /**
+     * @var $userService
+     */
+    protected $userRepository;
+    protected $userService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest:admin')->except('logout');
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        UserServiceInterface $userService
+    ) {
+        // $this->middleware('guest:admin')->except('logout');
+        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     public function login(){
@@ -44,18 +63,18 @@ class AuthController extends BaseController
         $message = 'Successfully register';
         $statusCode = Response::HTTP_OK;
 
-        return back()->with('success', 'User created successfully.');
+        return redirect()->route('auth.login')->with('success', 'Bạn đã tạo tài khoản thành công');
     }
 
     public function postLogin(AdminLoginRequest $request){
       $data = $request->getData();
       $remember = $request->get('remember');
-
       if (auth('admin')->attempt($data, $remember)) {
         return redirect()->route('admin.dashboard');
+      }else if(auth('web')->attempt($data, $remember))
+      {
+        return redirect()->route('web.home');
       }
-
-      return redirect()->back()->withErrors("Email hoặc mật khẩu không đúng. Vui lòng kiểm tra lại!");
     }
 
 
