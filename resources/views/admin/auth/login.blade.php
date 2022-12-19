@@ -37,21 +37,32 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center " href="{{route('web.home')}}">
-              <img class="logo-img mb-2" src="backend/images/logo_1.png" alt="logo" height="50">
+            <div class="card-header text-center">
+              <a href="{{route('web.home')}}"><img class="logo-img mb-2" src="backend/images/logo_1.png" alt="logo" height="50"></a>
               <span class="splash-description">Please enter your user information.</span>
             </div>
             <div class="card-body">
+                @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                    @php
+                        Session::forget('success');
+                    @endphp
+                </div>
+                @endif
                   {!!Form::open()->post()->route('admin.login.post')!!}
                     {!! Form::text('email')->type('email')->attrs(['class' => 'form-control-lg'])->placeholder('Email') !!}
                     {!! Form::text('password')->type('password')->attrs(['class' => 'form-control-lg'])->placeholder('Password') !!}
                     <div class="form-group">
                         <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" name="remember"><span class="custom-control-label">Nhớ mật khẩu</span>
+                            <input class="custom-control-input" type="checkbox" name="remember"><span class="custom-control-label">Remember Password</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Đăng nhập</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
                   {!!Form::close()!!}
+            </div>
+            <div class="card-body">
+            <a href="{{ route('user.registration') }}"><button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button></a>
             </div>
         </div>
     </div>

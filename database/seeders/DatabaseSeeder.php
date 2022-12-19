@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::transaction(function () {
             $this->call([
-                AdminSeeder::class
+                AdminUsersSeeder::class,
+                UserSeeder::class
             ]);
         });
     }

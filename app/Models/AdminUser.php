@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Admin extends Authenticatable
+
+class AdminUser extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -20,6 +21,8 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'email_verified_at'
     ];
 
     /**

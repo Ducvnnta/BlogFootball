@@ -6,9 +6,9 @@ use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Category;
 use App\Models\News;
-use DB;
 use Str;
 use  App\Traits\UploadTrait;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends BaseController
 {
