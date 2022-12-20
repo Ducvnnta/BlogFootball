@@ -53,6 +53,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('user.regist
 Route::get('/registration', [AuthController::class, 'registration'])->name('auth.register');
 
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/logout', [AuthController::class, 'logoutAuth'])->name('auth.logout');
+
 Route::get('/profile/{id}', [AuthController::class, 'getMe'])->name('auth.profile');
 
 

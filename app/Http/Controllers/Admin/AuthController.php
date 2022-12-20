@@ -92,4 +92,14 @@ class AuthController extends BaseController
 
         return redirect()->route('admin.login');
     }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logoutAuth()
+    {
+        auth()->logout();
+
+        return redirect()->route('web.home');
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="vn">
 
 <head>
     <title>Profile</title>
@@ -15,10 +15,6 @@
     <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="app.css" type="text/css">
-    <link href="backend/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="backend/libs/css/style.css">
-    <link rel="stylesheet" href="backend/libs/css/custom.css">
-    <link rel="stylesheet" href="backend/vendor/fonts/fontawesome/css/fontawesome-all.css">
 </head>
 
 <body>
@@ -130,7 +126,8 @@
                                     Edit profile
                                 </button>
                             </div>
-                            <div class="ms-3" style="margin-top: 120px; margin-left: 26px;">
+
+                            <div class="ms-3" style="margin-top: 120px; margin-left:26px">
                                 {{-- @php
                                     dd($user->name);
                                 @endphp --}}

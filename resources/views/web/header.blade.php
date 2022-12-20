@@ -9,8 +9,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-match dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         Tin tức giải đấu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,56 +50,58 @@
                         class="fas fa-search"></i></button>
             </div>
 
-
-
-            {{-- <div> --}}
-                {{-- <a href="{{ route('auth.register') }}"> --}}
-                    {{-- <div class=" box-1">
-                        <div class="btn btn-one">
-                            <span>{{ $userName }}</span>
-                        </div>
-                    </div> --}}
-                {{-- </a> --}}
-            {{-- </div> --}}
-            @php
-                $user = auth('web')->user();
-            @endphp
-            @if (is_null($user))
-            @php
-                $userName = 'Tài khoản';
-                $userId = '#';
-            @endphp
-        @else
-            @php
-                $userName = $user->name;
-                $userId = '(route('auth.profile', $user->id))';
-            @endphp
-        @endif
-            <div>
+            @if (Auth::check() === false)
+                @php
+                    $userName = 'Tài khoản';
+                @endphp
+            @else
+                @php
+                    $userName = Auth::user()->name;
+                @endphp
+            @endif
+            <div style="padding-bottom: 20px">
                 <li class="nav-item dropdown nav-user">
-
                     <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <div class=" box-1">
-                            <div class="btn btn-one">
-                                <span>{{ $userName }}</span>
-                            </div>
+
+                        <div>
+                            @if (Auth::check() === false)
+                                <a href="{{ route('auth.login') }}">
+                                    <div class=" box-1">
+                                        <div class="btn btn-one">
+                                            <span>{{ $userName }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            @else
+                                <div class=" box-1">
+                                    <div class="btn btn-one">
+                                        <span>{{ $userName }}</span>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                            <a class="dropdown-item" href="{{ $userId }}"><i
-                                    class="fas fa-user mr-2"></i>Profile</a>
-                            <a class="dropdown-item" href="#"><i
-                                    class="fas fa-cog mr-2"></i>Setting</a>
-                            <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
-                                    class="fas fa-power-off mr-2"></i>Logout</a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                            aria-labelledby="navbarDropdownMenuLink2">
+
+                            @if (Auth::check() === true)
+                                <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}">
+                                    <i class="fas fa-user mr-2"></i>Profile</a>
+                            @endif
+                            <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
+                            @if (Auth::check() === true)
+                                <a class="dropdown-item" href="{{ route('auth.logout') }}"><i
+                                        class="fas fa-power-off mr-2"></i>Logout</a>
+                            @endif
                         </div>
                     </a>
-
                 </li>
             </div>
 
-
         </div>
+
+
+    </div>
 
     </div>
     </div>
