@@ -44,7 +44,7 @@ class AuthController extends BaseController
 
     public function registration(){
         return view('web.news.register');
-      }
+    }
 
     /**
      * Register user by email
@@ -75,6 +75,11 @@ class AuthController extends BaseController
       {
         return redirect()->route('web.home');
       }
+    }
+
+    public function getMe($id){
+        $user = User::findOrFail($id);
+        return view('admin.auth.profile', compact('user'));
     }
 
 

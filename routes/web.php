@@ -53,6 +53,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('user.regist
 Route::get('/registration', [AuthController::class, 'registration'])->name('auth.register');
 
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/profile/{id}', [AuthController::class, 'getMe'])->name('auth.profile');
+
 
 Route::get('/search',  [HomeController::class, 'getSearch'])->name('home.search');
 
