@@ -50,25 +50,55 @@
                         class="fas fa-search"></i></button>
             </div>
 
-            @if (auth('web')->user() === false)
-                @php
-                    $userName = 'Tài khoản';
-                @endphp
-            @else
-                @php
-                    $userName = auth('web')->user()->name;
-                @endphp
-            @endif
 
-            <div>
-                <a href="{{ route('auth.register') }}">
-                    <div class=" box-1">
+
+            {{-- <div> --}}
+                {{-- <a href="{{ route('auth.register') }}"> --}}
+                    {{-- <div class=" box-1">
                         <div class="btn btn-one">
                             <span>{{ $userName }}</span>
                         </div>
-                    </div>
-                </a>
+                    </div> --}}
+                {{-- </a> --}}
+            {{-- </div> --}}
+            @php
+                $user = auth('web')->user();
+            @endphp
+            @if (is_null($user))
+            @php
+                $userName = 'Tài khoản';
+                $userId = '#';
+            @endphp
+        @else
+            @php
+                $userName = $user->name;
+                $userId = '(route('auth.profile', $user->id))';
+            @endphp
+        @endif
+            <div>
+                <li class="nav-item dropdown nav-user">
+
+                    <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <div class=" box-1">
+                            <div class="btn btn-one">
+                                <span>{{ $userName }}</span>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                            <a class="dropdown-item" href="{{ $userId }}"><i
+                                    class="fas fa-user mr-2"></i>Profile</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-cog mr-2"></i>Setting</a>
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
+                                    class="fas fa-power-off mr-2"></i>Logout</a>
+                        </div>
+                    </a>
+
+                </li>
             </div>
+
+
         </div>
 
     </div>
