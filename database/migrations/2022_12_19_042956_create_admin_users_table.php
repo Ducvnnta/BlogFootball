@@ -18,6 +18,7 @@ class CreateAdminUsersTable extends Migration
             $table->boolean('is_admin')->default(0)->comment('0: normal user, 1: admin user');
             $table->string('name', 100);
             $table->string('image')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('email', 100)->unique();
             $table->string('password', 255)->nullable();
             $table->timestamp('email_verified_at')->nullable();
