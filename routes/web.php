@@ -55,6 +55,8 @@ Route::get('/registration', [AuthController::class, 'registration'])->name('auth
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logoutAuth'])->name('auth.logout');
 
+Route::get('/edit-profile/{id}', [AuthController::class, 'edit'])->name('auth.edit.profile');
+
 Route::get('/profile/{id}', [AuthController::class, 'getMe'])->name('auth.profile');
 
 

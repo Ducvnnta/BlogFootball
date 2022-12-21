@@ -46,6 +46,10 @@ class AuthController extends BaseController
         return view('web.news.register');
     }
 
+    public function edit(){
+        return view('admin.auth.editProfile');
+    }
+
     /**
      * Register user by email
      *
@@ -102,4 +106,6 @@ class AuthController extends BaseController
 
         return redirect()->route('web.home');
     }
+
+    
 }

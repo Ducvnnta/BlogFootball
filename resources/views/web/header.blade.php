@@ -59,7 +59,7 @@
                     $userName = Auth::user()->name;
                 @endphp
             @endif
-            <div style="padding-bottom: 20px">
+            <div style="padding-bottom: 50px">
                 <li class="nav-item dropdown nav-user">
                     <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
