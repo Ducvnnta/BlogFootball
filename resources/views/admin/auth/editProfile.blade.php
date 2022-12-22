@@ -127,6 +127,11 @@ select:focus{
     <div class="wrapper bg-white mt-sm-5">
         <h4 class="pb-4 border-bottom">Account settings</h4>
         <div class="d-flex align-items-start py-3 border-bottom">
+
+            @if(is_null(Auth::user()->image) === false)
+            <img src="{{ asset('/storage/images/' . Auth::user()->image) }}" class="img" alt="">
+            @endif
+
             <img src="backend/images/logo_1.png"
                 class="img" alt="">
             <div class="pl-sm-4 pl-2" id="img-section">
@@ -136,24 +141,25 @@ select:focus{
             </div>
         </div>
         <div class="py-2">
+
             <div class="row py-2">
                 <div class="col-md-6">
                     <label for="firstname">First Name</label>
-                    <input type="text" class="bg-light form-control" placeholder="{{ Auth::user()->name }}">
+                    <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
                 </div>
                 <div class="col-md-6 pt-md-0 pt-3">
                     <label for="lastname">Last Name</label>
-                    <input type="text" class="bg-light form-control" placeholder="{{ Auth::user()->name }}">
+                    <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
                 </div>
             </div>
             <div class="row py-2">
                 <div class="col-md-6">
                     <label for="email">Email Address</label>
-                    <input type="text" class="bg-light form-control" placeholder="{{ Auth::user()->email }}">
+                    <input type="text" class="bg-light form-control" placeholder="{{  $user->email }}">
                 </div>
                 <div class="col-md-6 pt-md-0 pt-3">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" class="bg-light form-control" placeholder="{{ Auth::user()->phone }}">
+                    <input type="tel" class="bg-light form-control" placeholder="{{  $user->phone }}">
                 </div>
             </div>
             <div class="row py-2">

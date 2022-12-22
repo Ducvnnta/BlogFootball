@@ -22,6 +22,8 @@ class AdminUser extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'image',
+        'phone',
         'email_verified_at'
     ];
 

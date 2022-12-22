@@ -13,5 +13,5 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
 
     public function findByEmail($email): ?User;
 
-
+    public function checkAuthUserAdmin($id);
 }
