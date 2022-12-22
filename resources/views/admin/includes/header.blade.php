@@ -104,8 +104,8 @@
                           <h5 class="mb-0 text-white nav-user-name">{{ $user->name }} </h5>
                           <span class="status"></span><span class="ml-2">Admin</span>
                       </div>
-                      <a class="dropdown-item" href="{{ route('auth.profile') }}"><i class="fas fa-user mr-2"></i>Account</a>
-                      <a class="dropdown-item" href="{{ route('auth.profile') }}"><i class="fas fa-cog mr-2"></i>Setting</a>
+                      <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}"><i class="fas fa-user mr-2"></i>Account</a>
+                      <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}"><i class="fas fa-cog mr-2"></i>Setting</a>
                       <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                   </div>
               </li>

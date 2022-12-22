@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Models\AdminUser;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Services\User\UserServiceInterface;
@@ -46,8 +47,20 @@ class AuthController extends BaseController
         return view('web.news.register');
     }
 
-    public function edit(){
-        return view('admin.auth.editProfile');
+    public function edit($id){
+        $user = $this->userRepository->checkAuthUserAdmin($id);
+        return view('admin.auth.editProfile', compact('user'));
+    }
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+            dd($filename);
+            $request->image->storeAs('images',$filename,'public');
+            Auth()->user()->update(['image'=>$filename]);
+        }
+        return redirect()->back();
     }
 
     /**
@@ -82,7 +95,7 @@ class AuthController extends BaseController
     }
 
     public function getMe($id){
-        $user = User::findOrFail($id);
+        $user = $this->userRepository->checkAuthUserAdmin($id);
         return view('admin.auth.profile', compact('user'));
     }
 
@@ -107,5 +120,5 @@ class AuthController extends BaseController
         return redirect()->route('web.home');
     }
 
-    
+
 }

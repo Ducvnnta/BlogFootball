@@ -9,8 +9,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-match dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Tin tức giải đấu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -108,7 +108,8 @@
 </nav>
 <div class="search-box">
     <div class="container">
-        <form class="search-form" role="search" method="GET" id="key" action="{{ route('home.search') }}">
+        <form class="search-form" role="search" method="GET" id="key"
+            action="{{ route('home.search') }}">
             <input class="form-inline" type="text" name="keyword" placeholder="Tìm Kiếm">
         </form>
 

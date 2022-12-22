@@ -2,6 +2,7 @@
 
 namespace App\Repositories\User;
 
+use App\Models\AdminUser;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 
@@ -42,5 +43,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function findByEmail($email): ?User
     {
         return $this->model->where('email', $email)->first();
+    }
+
+    public function checkAuthUserAdmin($id)
+    {
+        if(auth('admin')->check())
+        {
+            $user = AdminUser::findOrFail($id);
+        }else if(auth('web')->check())
+        {
+            $user = User::findOrFail($id);
+        }
+        return $user;
     }
 }
