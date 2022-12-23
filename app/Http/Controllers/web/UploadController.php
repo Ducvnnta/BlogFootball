@@ -7,24 +7,15 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
-    public function uploadImage(Request $request) {
 
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+    // public function upload(Request $request)
+    // {
+    //     if($request->hasFile('image')){
+    //         $filename = $request->image->getClientOriginalName();
+    //         $request->image->storeAs('images',$filename,'public');
+    //         Auth()->user()->update(['image'=>$filename]);
+    //     }
+    //     return redirect()->back();
+    // }
 
-        $image  = time().'.'.$request->image->extension();
-
-        $request->image->move(public_path('uploads'), $image);
-
-        $image  = Image::create(["image_name" => $image]);
-
-        if(!is_null($image)) {
-            return back()->with('success','Success! image uploaded');
-        }
-
-        else {
-            return back()->with("failed", "Alert! image not uploaded");
-        }
-    }
 }

@@ -17,9 +17,9 @@
 </head>
 
 <body>
-    @include("web.header")
+    @include('web.header')
     @yield('content')
-    @include("web.footer")
+    @include('web.footer')
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="OwlCarousel/dist/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -44,22 +44,22 @@
             });
             var owlslide = $('.owl-carousel-slide');
             owlslide.owlCarousel({
-                loop:true,
-                margin:10,
-                nav:false,
+                loop: true,
+                margin: 10,
+                nav: false,
                 dots: false,
                 autoplay: true,
                 autoplayHoverPause: true,
                 autoplayTimeout: 2500,
-                responsive:{
-                     0:{
-                         items:1
-                        },
-                    600:{
-                        items:1
+                responsive: {
+                    0: {
+                        items: 1
                     },
-                    1000:{
-                        items:3
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 3
                     }
                 }
             })
@@ -230,6 +230,7 @@
             })
 
         });
-
     </script>
-    <html>
+
+</body>
+</html>

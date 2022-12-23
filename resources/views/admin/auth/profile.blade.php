@@ -121,23 +121,22 @@
                                 style="background-color: #000; height:200px;">
                                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
 
-                                    @if (is_null(Auth::user()->image) === false)
+                                    @if (!is_null($user->image))
                                         <img class="image rounded-circle"
-                                            src="{{ asset('/storage/images/' . Auth::user()->image) }}"
-                                            alt="profile_image" style="width: 150px; z-index: 1">
+                                            src="{{ asset('/storage/images/' . $user->image) }}" alt="profile_image"
+                                            style="width: 150px; z-index: 1">
                                     @endif
 
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
                                         alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                         style="width: 150px; z-index: 1">
 
-                                    <a href="{{ route('auth.edit.profile', $user->id) }}">
+                                    <a href="{{ route('auth.edit.profile') }}">
 
                                         <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                                             style="z-index: 1;">
                                             Edit profile
                                     </a>
-                                    </button>
 
                                 </div>
 

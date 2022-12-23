@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services\Uppload;
+namespace App\Services\Upload;
 
 interface UploadImageServiceInterface
 {
-    public static function uploadImage($request);
+    public static function addImage($request);
+
 }
