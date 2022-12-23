@@ -92,6 +92,7 @@
                       </li>
                   </ul>
               </li>
+
               <li class="nav-item dropdown nav-user">
                   <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="backend/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle">
@@ -104,8 +105,8 @@
                           <h5 class="mb-0 text-white nav-user-name">{{ $user->name }} </h5>
                           <span class="status"></span><span class="ml-2">Admin</span>
                       </div>
-                      <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}"><i class="fas fa-user mr-2"></i>Account</a>
-                      <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}"><i class="fas fa-cog mr-2"></i>Setting</a>
+                      <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fas fa-user mr-2"></i>Account</a>
+                      <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fas fa-cog mr-2"></i>Setting</a>
                       <a class="dropdown-item" href="{{route('admin.logout')}}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                   </div>
               </li>

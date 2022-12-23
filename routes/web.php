@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\web\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaptureController;
 use App\Http\Controllers\web\CategoryController;
@@ -10,6 +11,10 @@ use App\Http\Controllers\web\DayController;
 use App\Http\Controllers\web\RankController;
 use App\Http\Controllers\web\ScheduleController;
 use App\Http\Controllers\web\detailnewscontroller;
+use App\Http\Controllers\web\UploadController;
+use App\Http\Controllers\web\UserController;
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,8 +59,15 @@ Route::get('/registration', [AuthController::class, 'registration'])->name('auth
 
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logoutAuth'])->name('auth.logout');
+Route::get('/profile', [AuthController::class, 'getMe'])->name('auth.profile');
 
-Route::get('/edit-profile/{id}', [AuthController::class, 'edit'])->name('auth.edit.profile');
+Route::get('/update-profile', [AuthController::class, 'updateProfile'])->name('auth.update.profile');
+
+
+Route::get('/edit-profile', [AdminAuthController::class, 'edit'])->name('auth.edit.profile');
+
+
+
 
 Route::get('/profile/{id}', [AuthController::class, 'getMe'])->name('auth.profile');
 

@@ -5,6 +5,7 @@ namespace App\Repositories\User;
 use App\Models\AdminUser;
 use App\Models\User;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -45,14 +46,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $this->model->where('email', $email)->first();
     }
 
-    public function checkAuthUserAdmin($id)
+    public function checkAuthUserAdmin()
     {
-        if(auth('admin')->check())
+        if(!is_null(Auth::user()->is_admin))
         {
-            $user = AdminUser::findOrFail($id);
-        }else if(auth('web')->check())
+            $user = AdminUser::findOrFail(Auth::id());
+        }else if(is_null(Auth::user()->is_admin))
         {
-            $user = User::findOrFail($id);
+
+            $user = User::findOrFail(Auth::id());
         }
         return $user;
     }

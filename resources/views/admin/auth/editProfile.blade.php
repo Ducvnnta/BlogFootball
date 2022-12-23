@@ -15,6 +15,16 @@
     <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="app.css" type="text/css">
+    <link rel="stylesheet" href="backend/libs/css/style.css">
+    <link rel="stylesheet" href="backend/libs/css/custom.css">
+    <link rel="stylesheet" href="backend/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="backend/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="backend/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="backend/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="backend/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet" href="backend/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="backend/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="backend/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
@@ -133,24 +143,26 @@ select:focus{
             @endif
 
             <img src="backend/images/logo_1.png"
-                class="img" alt="">
+                class="img" id="blah" alt="">
             <div class="pl-sm-4 pl-2" id="img-section">
                 <b>Profile Photo</b>
-                <p>Accepted file type .png. Less than 1MB</p>
-                <button class="btn button border"><b>Upload</b></button>
+                <form runat="server">
+                    <input accept="image/*" type='file' id="imgInp" />
+                  </form>
+
             </div>
         </div>
         <div class="py-2">
 
             <div class="row py-2">
                 <div class="col-md-6">
-                    <label for="firstname">First Name</label>
+                    <label for="firstname">Name</label>
                     <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
                 </div>
-                <div class="col-md-6 pt-md-0 pt-3">
+                {{-- <div class="col-md-6 pt-md-0 pt-3">
                     <label for="lastname">Last Name</label>
                     <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
-                </div>
+                </div> --}}
             </div>
             <div class="row py-2">
                 <div class="col-md-6">
@@ -162,7 +174,7 @@ select:focus{
                     <input type="tel" class="bg-light form-control" placeholder="{{  $user->phone }}">
                 </div>
             </div>
-            <div class="row py-2">
+            {{-- <div class="row py-2">
                 <div class="col-md-6">
                     <label for="country">Country</label>
                     <select name="country" id="country" class="bg-light">
@@ -183,9 +195,10 @@ select:focus{
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="py-3 pb-4 border-bottom">
-                <button class="btn btn-primary mr-3">Save Changes</button>
+                <a  href="{{ route('auth.update.profile') }}">
+                    <button class="btn btn-primary mr-3">Save Changes</button></a>
                 <button class="btn border button">Cancel</button>
             </div>
             <div class="d-sm-flex align-items-center pt-3" id="deactivate">
@@ -199,6 +212,17 @@ select:focus{
             </div>
         </div>
     </div>
+    <script src="backend/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="backend/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="backend/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    {{-- <script>
+      const CK_UPLOAD_IMG = "{{route('admin.editor.upload', ['_token' => csrf_token()])}}";
+    </script> --}}
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script src="backend/libs/js/main-js.js"></script>
 </body>
 
 </html>

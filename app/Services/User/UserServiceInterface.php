@@ -11,4 +11,5 @@ interface UserServiceInterface
     public function checkUserExist($email);
 
     public function checkTokenDeviceExists($deviceToken);
+
 }

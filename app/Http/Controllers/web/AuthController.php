@@ -1,21 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\AdminUser;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Services\Upload\UploadImageService;
+use App\Services\Upload\UploadImageServiceInterface;
 use App\Services\User\UserServiceInterface;
 use App\Traits\ApiResponser;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class AuthController extends BaseController
+class AuthController
 {
     use ApiResponser;
 
@@ -24,6 +27,8 @@ class AuthController extends BaseController
      */
     protected $userRepository;
     protected $userService;
+    // protected $uploadImageService;
+
 
     /**
      * Create a new controller instance.
@@ -33,10 +38,13 @@ class AuthController extends BaseController
     public function __construct(
         UserRepositoryInterface $userRepository,
         UserServiceInterface $userService
+        // UploadImageService $uploadImageService
+
     ) {
         // $this->middleware('guest:admin')->except('logout');
         $this->userRepository = $userRepository;
         $this->userService = $userService;
+        // $this->uploadImageService = $uploadImageService;
     }
 
     public function login(){
@@ -47,11 +55,17 @@ class AuthController extends BaseController
         return view('web.news.register');
     }
 
-    public function edit(){
-        $user = $this->userRepository->checkAuthUserAdmin();
-        return view('admin.auth.editProfile', compact('user'));
-    }
 
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('image')){
+            $filename = $request->image->getClientOriginalName();
+            $request->image->storeAs('images',$filename,'public');
+            Auth()->user()->update(['image'=>$filename]);
+        }
+        return redirect()->back();
+    }
 
     /**
      * Register user by email
@@ -88,6 +102,30 @@ class AuthController extends BaseController
         $user = $this->userRepository->checkAuthUserAdmin();
         return view('admin.auth.profile', compact('user'));
     }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $user = Auth::user();
+        dd(12321);
+        $data = $request->getDataUser();
+        $path = $request->file('image')->store('image');
+        // if (!is_null($request->image)) {
+        //     $image = $this->uploadImageService->addImage($request->image, 'Avatar');
+        //     dd( $image);
+        //     if (is_null($image)) {
+        //         $message = trans('Không tìm thấy đường dẫn');
+        //         return $this->errorResponse($message);
+        //     }
+
+        //     $data['image'] = $image;
+        // }
+        dd( $path);
+        $user->update($data);
+        $message = trans('Update profile thành công');
+        return view('admin.auth.profile', compact('user'));
+
+    }
+
 
 
     /**

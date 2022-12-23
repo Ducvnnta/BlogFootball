@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EditorController;
+use App\Http\Controllers\web\AuthController as WebAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('admin.login.p
 Route::middleware('auth:admin')->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
   Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+  Route::get('/edit-profile', [AuthController::class, 'edit'])->name('admin.edit.profile');
+  Route::get('/profile', [WebAuthController::class, 'getMe'])->name('admin.profile');
+
+
   Route::post('/ckeditor/upload', [EditorController::class, 'upload'])->name('admin.editor.upload');
 
   Route::prefix('news')->group(function () {
