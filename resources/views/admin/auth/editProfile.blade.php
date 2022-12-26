@@ -28,15 +28,27 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: aliceblue;
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .wrapper {
@@ -146,72 +158,80 @@
 </head>
 
 <body>
-    {{-- backend/images/logo_1.png --}}
-    <form class="mx-1 mx-md-4" method="POST" action="{{ route('auth.update.profile') }}">
-        {{ csrf_field() }}
+    <div class="d-flex flex-column justify-content-center w-100 h-100">
         <div class="wrapper bg-white mt-sm-5">
-
-            <h4 class="pb-4 border-bottom">Account settings</h4>
-            <div class="d-flex align-items-start py-3 border-bottom">
-
-
-                @if (is_null(auth('admin')->user()->image) === false || is_null(auth('web')->user()->image) === false)
-                    <img src="{{ asset('/storage/images/' . Auth::user()->image) }}" class="img" alt="">
-                @endif
-
-                <img src="backend/images/admin.png" class="img" id="blah" alt="">
-                <div class="pl-sm-4 pl-2" id="img-section">
-                    <b>Profile Photo</b>
-                    <form runat="server">
-                        <input accept="image/*" type='file' id="imgInp" />
-                    </form>
-
+            <div class="py-3 pb-4 border-bottom d-sm-flex align-items-center pt-3" id="deactivate">
+                <div>
+                    <h4 class="py-2 pb-3">Profile Settings</h4>
+                </div>
+                <div class="ml-auto">
+                    <a href="javascript:history.back()"> <button
+                            class="btn btn-success py-1 pb-2  btn-submit btn-primary mr-3"><i class="fa fa-arrow-left"
+                                aria-hidden="true">
+                            </i></button></a>
                 </div>
             </div>
-            <div class="py-2">
 
-                <div class="row py-2">
-                    <div class="col-md-6">
-                        <label for="firstname">Name</label>
-                        <input type="text" name="name" class="bg-light form-control"
-                            placeholder="{{ $user->name }}">
-                        @if ($errors->has('name'))
-                            <span class="text-danger">{{ $errors->first('name') }}</span>
-                        @endif
+            <form class="mx-1 mx-md-4" method="POST" action="{{ route('auth.update.profile') }}"
+                enctype='multipart/form-data'>
+                {{ csrf_field() }}
+                <div class="d-flex align-items-start py-3 border-bottom">
+
+                    <img src="{{ asset(Auth::user()->image) }}" class="img" id="blah" alt="">
+
+                    <div class="pl-sm-4 pl-2" id="img-section">
+                        <b>Profile Photo</b>
+                        <input type='file' name="image" id="imgInp" alt="" />
                     </div>
-                    {{-- <div class="col-md-6 pt-md-0 pt-3">
+                </div>
+                @if ($errors->has('image'))
+                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                @endif
+                <div class="py-2">
+
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="firstname">Name</label>
+                            <input type="text" name="name" class="bg-light form-control"
+                                value="{{ $user->name }}">
+
+                            @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+                        {{-- <div class="col-md-6 pt-md-0 pt-3">
                     <label for="lastname">Last Name</label>
                     <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
                 </div> --}}
-                </div>
-                <div class="row py-2">
-                    <div class="col-md-6">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" class="bg-light form-control"
-                            placeholder="{{ $user->email }}">
-                        @if ($errors->has('email'))
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                        @endif
                     </div>
-                </div>
-                <div class="row py-2">
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="bg-light form-control"
+                                value="{{ $user->email }}">
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row py-2">
 
-                    <div class="col-md-6 pt-md-0 pt-3">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" name="phone" class="bg-light form-control"
-                            placeholder="{{ $user->phone }}">
-                        @if ($errors->has('phone'))
-                            <span class="text-danger">{{ $errors->first('phone') }}</span>
-                        @endif
-                    </div>
-                    {{-- <input type="password" name="confirm_password" class="form-control"
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" name="phone" class="bg-light form-control"
+                                value="{{ $user->phone }}">
+                            @if ($errors->has('phone'))
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
+                            @endif
+                        </div>
+                        {{-- <input type="password" name="confirm_password" class="form-control"
                 placeholder="Confirm your password" /> --}}
-                    {{-- @if ($errors->has('confirm_password'))
+                        {{-- @if ($errors->has('confirm_password'))
                 <span
                     class="text-danger">{{ $errors->first('confirm_password') }}</span>
             @endif --}}
-                </div>
-                {{-- <div class="row py-2">
+                    </div>
+                    {{-- <div class="row py-2">
                 <div class="col-md-6">
                     <label for="country">Country</label>
                     <select name="country" id="country" class="bg-light">
@@ -234,26 +254,27 @@
                 </div>
             </div> --}}
 
-                <div class="py-3 pb-4 border-bottom">
-                    <button class="btn btn-success btn-submit btn-primary mr-3"
-                        action="{{ route('auth.edit.profile') }}">Save Changes</button>
-                    <button class="btn border button">Cancel</button>
+                    <div class="py-3 pb-4 border-bottom">
+                        <button class="btn btn-success btn-submit btn-primary mr-3"
+                            action="{{ route('auth.edit.profile') }}">Save Changes</button>
+                        <button class="btn border button">Cancel</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                <div>
-                    <b>Deactivate your account</b>
-                    <p>Details about your company account and password</p>
+                <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                    <div>
+                        <b>Deactivate your account</b>
+                        <p>Details about your company account and password</p>
+                    </div>
+                    <div class="ml-auto">
+                        <button class="btn danger">Deactivate</button>
+                    </div>
                 </div>
-                <div class="ml-auto">
-                    <button class="btn danger">Deactivate</button>
-                </div>
-            </div>
         </div>
-    </form>
-
+        </form>
     </div>
+
+
     <script src="backend/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->
     <script src="backend/vendor/bootstrap/js/bootstrap.bundle.js"></script>
