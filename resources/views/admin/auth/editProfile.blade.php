@@ -26,155 +26,192 @@
     <link rel="stylesheet" href="backend/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="backend/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body{
-    font-family: 'Poppins', sans-serif;
-    background-color: aliceblue;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: aliceblue;
+        }
 
-.wrapper{
-    padding: 30px 50px;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    margin: 10px auto;
-    max-width: 600px;
-}
-h4{
-    letter-spacing: -1px;
-    font-weight: 400;
-}
-.img{
-    width: 70px;
-    height: 70px;
-    border-radius: 6px;
-    object-fit: cover;
-}
-#img-section p,#deactivate p{
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 10px;
-    text-align: justify;
-}
-#img-section b,#img-section button,#deactivate b{
-    font-size: 14px;
-}
+        .wrapper {
+            padding: 30px 50px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            margin: 10px auto;
+            max-width: 600px;
+        }
 
-label{
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: #777;
-    padding-left: 3px;
-}
+        h4 {
+            letter-spacing: -1px;
+            font-weight: 400;
+        }
 
-.form-control{
-    border-radius: 10px;
-}
+        .img {
+            width: 70px;
+            height: 70px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
 
-input[placeholder]{
-    font-weight: 500;
-}
-.form-control:focus{
-    box-shadow: none;
-    border: 1.5px solid #0779e4;
-}
-select{
-    display: block;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    height: 40px;
-    padding: 5px 10px;
-    /* -webkit-appearance: none; */
-}
+        #img-section p,
+        #deactivate p {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
 
-select:focus{
-    outline: none;
-}
-.button{
-    background-color: #fff;
-    color: #0779e4;
-}
-.button:hover{
-    background-color: #0779e4;
-    color: #fff;
-}
-.btn-primary{
-    background-color: #0779e4;
-}
-.danger{
-    background-color: #fff;
-    color: #e20404;
-    border: 1px solid #ddd;
-}
-.danger:hover{
-    background-color: #e20404;
-    color: #fff;
-}
-@media(max-width:576px){
-    .wrapper{
-        padding: 25px 20px;
-    }
-    #deactivate{
-        line-height: 18px;
-    }
-}
+        #img-section b,
+        #img-section button,
+        #deactivate b {
+            font-size: 14px;
+        }
 
+        label {
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #777;
+            padding-left: 3px;
+        }
 
+        .form-control {
+            border-radius: 10px;
+        }
+
+        input[placeholder] {
+            font-weight: 500;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border: 1.5px solid #0779e4;
+        }
+
+        select {
+            display: block;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            height: 40px;
+            padding: 5px 10px;
+            /* -webkit-appearance: none; */
+        }
+
+        select:focus {
+            outline: none;
+        }
+
+        .button {
+            background-color: #fff;
+            color: #0779e4;
+        }
+
+        .button:hover {
+            background-color: #0779e4;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #0779e4;
+        }
+
+        .danger {
+            background-color: #fff;
+            color: #e20404;
+            border: 1px solid #ddd;
+        }
+
+        .danger:hover {
+            background-color: #e20404;
+            color: #fff;
+        }
+
+        @media(max-width:576px) {
+            .wrapper {
+                padding: 25px 20px;
+            }
+
+            #deactivate {
+                line-height: 18px;
+            }
+        }
     </style>
 </head>
 
 <body>
     {{-- backend/images/logo_1.png --}}
+    <form class="mx-1 mx-md-4" method="POST" action="{{ route('auth.update.profile') }}">
+        {{ csrf_field() }}
+        <div class="wrapper bg-white mt-sm-5">
 
-    <div class="wrapper bg-white mt-sm-5">
-        <h4 class="pb-4 border-bottom">Account settings</h4>
-        <div class="d-flex align-items-start py-3 border-bottom">
+            <h4 class="pb-4 border-bottom">Account settings</h4>
+            <div class="d-flex align-items-start py-3 border-bottom">
 
-            @if(is_null(Auth::user()->image) === false)
-            <img src="{{ asset('/storage/images/' . Auth::user()->image) }}" class="img" alt="">
-            @endif
 
-            <img src="backend/images/logo_1.png"
-                class="img" id="blah" alt="">
-            <div class="pl-sm-4 pl-2" id="img-section">
-                <b>Profile Photo</b>
-                <form runat="server">
-                    <input accept="image/*" type='file' id="imgInp" />
-                  </form>
+                @if (is_null(auth('admin')->user()->image) === false || is_null(auth('web')->user()->image) === false)
+                    <img src="{{ asset('/storage/images/' . Auth::user()->image) }}" class="img" alt="">
+                @endif
 
-            </div>
-        </div>
-        <div class="py-2">
+                <img src="backend/images/admin.png" class="img" id="blah" alt="">
+                <div class="pl-sm-4 pl-2" id="img-section">
+                    <b>Profile Photo</b>
+                    <form runat="server">
+                        <input accept="image/*" type='file' id="imgInp" />
+                    </form>
 
-            <div class="row py-2">
-                <div class="col-md-6">
-                    <label for="firstname">Name</label>
-                    <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
                 </div>
-                {{-- <div class="col-md-6 pt-md-0 pt-3">
+            </div>
+            <div class="py-2">
+
+                <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="firstname">Name</label>
+                        <input type="text" name="name" class="bg-light form-control"
+                            placeholder="{{ $user->name }}">
+                        @if ($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
+                    {{-- <div class="col-md-6 pt-md-0 pt-3">
                     <label for="lastname">Last Name</label>
                     <input type="text" class="bg-light form-control" placeholder="{{ $user->name }}">
                 </div> --}}
-            </div>
-            <div class="row py-2">
-                <div class="col-md-6">
-                    <label for="email">Email Address</label>
-                    <input type="text" class="bg-light form-control" placeholder="{{  $user->email }}">
                 </div>
-                <div class="col-md-6 pt-md-0 pt-3">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" class="bg-light form-control" placeholder="{{  $user->phone }}">
+                <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="bg-light form-control"
+                            placeholder="{{ $user->email }}">
+                        @if ($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                        @endif
+                    </div>
                 </div>
-            </div>
-            {{-- <div class="row py-2">
+                <div class="row py-2">
+
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" name="phone" class="bg-light form-control"
+                            placeholder="{{ $user->phone }}">
+                        @if ($errors->has('phone'))
+                            <span class="text-danger">{{ $errors->first('phone') }}</span>
+                        @endif
+                    </div>
+                    {{-- <input type="password" name="confirm_password" class="form-control"
+                placeholder="Confirm your password" /> --}}
+                    {{-- @if ($errors->has('confirm_password'))
+                <span
+                    class="text-danger">{{ $errors->first('confirm_password') }}</span>
+            @endif --}}
+                </div>
+                {{-- <div class="row py-2">
                 <div class="col-md-6">
                     <label for="country">Country</label>
                     <select name="country" id="country" class="bg-light">
@@ -196,11 +233,14 @@ select:focus{
                     </div>
                 </div>
             </div> --}}
-            <div class="py-3 pb-4 border-bottom">
-                <a  href="{{ route('auth.update.profile') }}">
-                    <button class="btn btn-primary mr-3">Save Changes</button></a>
-                <button class="btn border button">Cancel</button>
+
+                <div class="py-3 pb-4 border-bottom">
+                    <button class="btn btn-success btn-submit btn-primary mr-3"
+                        action="{{ route('auth.edit.profile') }}">Save Changes</button>
+                    <button class="btn border button">Cancel</button>
+                </div>
             </div>
+
             <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                 <div>
                     <b>Deactivate your account</b>
@@ -211,6 +251,8 @@ select:focus{
                 </div>
             </div>
         </div>
+    </form>
+
     </div>
     <script src="backend/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->

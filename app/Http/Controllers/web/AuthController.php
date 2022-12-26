@@ -55,7 +55,10 @@ class AuthController
         return view('web.news.register');
     }
 
-
+    public function edit(){
+        $user = $this->userRepository->checkAuthUserAdmin();
+        return view('admin.auth.editProfile', compact('user'));
+    }
 
     public function upload(Request $request)
     {
@@ -106,7 +109,7 @@ class AuthController
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = Auth::user();
-        dd(12321);
+        dd($user);
         $data = $request->getDataUser();
         $path = $request->file('image')->store('image');
         // if (!is_null($request->image)) {

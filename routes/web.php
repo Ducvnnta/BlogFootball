@@ -61,9 +61,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthController::class, 'logoutAuth'])->name('auth.logout');
 Route::get('/profile', [AuthController::class, 'getMe'])->name('auth.profile');
 
-Route::get('/update-profile', [AuthController::class, 'updateProfile'])->name('auth.update.profile');
-
-
+Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('auth.update.profile');
 Route::get('/edit-profile', [AdminAuthController::class, 'edit'])->name('auth.edit.profile');
 
 

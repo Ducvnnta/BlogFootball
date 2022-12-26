@@ -48,10 +48,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function checkAuthUserAdmin()
     {
-        if(!is_null(Auth::user()->is_admin))
+        if(Auth::check() === false)
+        {
+            return view();
+        }else if(Auth::check() && !is_null(Auth::user()->is_admin))
         {
             $user = AdminUser::findOrFail(Auth::id());
-        }else if(is_null(Auth::user()->is_admin))
+
+        }else if(Auth::check() && is_null(Auth::user()->is_admin))
         {
 
             $user = User::findOrFail(Auth::id());
