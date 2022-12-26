@@ -14,13 +14,16 @@ use App\Services\Upload\UploadImageService;
 use App\Services\Upload\UploadImageServiceInterface;
 use App\Services\User\UserServiceInterface;
 use App\Traits\ApiResponser;
+use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 
 class AuthController
 {
     use ApiResponser;
+    use UploadTrait;
 
     /**
      * @var $userService
@@ -38,13 +41,11 @@ class AuthController
     public function __construct(
         UserRepositoryInterface $userRepository,
         UserServiceInterface $userService
-        // UploadImageService $uploadImageService
 
     ) {
         // $this->middleware('guest:admin')->except('logout');
         $this->userRepository = $userRepository;
         $this->userService = $userService;
-        // $this->uploadImageService = $uploadImageService;
     }
 
     public function login(){
@@ -108,25 +109,23 @@ class AuthController
 
     public function updateProfile(UpdateProfileRequest $request)
     {
-        $user = Auth::user();
-        dd($user);
+        try {
         $data = $request->getDataUser();
-        $path = $request->file('image')->store('image');
-        // if (!is_null($request->image)) {
-        //     $image = $this->uploadImageService->addImage($request->image, 'Avatar');
-        //     dd( $image);
-        //     if (is_null($image)) {
-        //         $message = trans('Không tìm thấy đường dẫn');
-        //         return $this->errorResponse($message);
-        //     }
+        $user = $this->userRepository->checkAuthUserAdmin();
 
-        //     $data['image'] = $image;
-        // }
-        dd( $path);
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $data['image'] = $this->uploadImage($image, 'avatars');
+          }else{
+            $data['image'] = $request->get('image');
+          }
+
         $user->update($data);
-        $message = trans('Update profile thành công');
-        return view('admin.auth.profile', compact('user'));
 
+        return view('admin.auth.profile', compact('user'));
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors($e->getMessage());
+    } //end try
     }
 
 

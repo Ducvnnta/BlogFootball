@@ -12,7 +12,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     //lấy model tương ứng
     public function getModel()
     {
-        return \App\Models\User::class;
+        if(Auth::guard('admin')->check())
+        {
+            return \App\Models\AdminUser::class;
+
+        }
+        else{
+            return \App\Models\User::class;
+        }
     }
 
     /**
@@ -62,4 +69,5 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
         return $user;
     }
+
 }

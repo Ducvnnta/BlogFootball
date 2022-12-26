@@ -119,17 +119,15 @@
                         <div class="card">
                             <div class="rounded-top text-white d-flex flex-row"
                                 style="background-color: #000; height:200px;">
-                                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-
+                                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 215px">
                                     @if (!is_null($user->image))
-                                        <img class="image rounded-circle"
-                                            src="{{ asset('/storage/images/' . $user->image) }}" alt="profile_image"
-                                            style="width: 150px; z-index: 1">
+                                        <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                            src="{{ asset($user->image) }}" alt="profile_image"
+                                            style="width: 150px; height: 215px; z-index: 1">
+                                    @else
+                                        <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                            style="width: 150px; height: 215px; z-index: 1">
                                     @endif
-
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                        alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                        style="width: 150px; z-index: 1">
 
                                     @if (Auth::guard('admin')->check())
                                         <a href="{{ route('admin.edit.profile') }}">
@@ -145,12 +143,9 @@
                                                 Edit profile
                                         </a>
                                     @endif
-
-
                                 </div>
 
                                 <div class="ms-3" style="margin-top: 120px; margin-left:26px">
-
                                     <h5>{{ $user->name }}</h5>
                                     <p>New York</p>
                                 </div>

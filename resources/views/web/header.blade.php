@@ -60,8 +60,8 @@
                 @endphp
             @endif
             <div style="padding-bottom: 50px">
-                <li class="nav-item dropdown nav-user">
-                    <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-user-img"  id="navbarDropdownMenuLink2" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
 
                         <div>
@@ -83,7 +83,10 @@
                         </div>
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                             aria-labelledby="navbarDropdownMenuLink2">
-
+                            {{-- @if (Auth::check() === true)
+                                <a class="dropdown-item">
+                                    <i class="fas fa-user mr-2"></i>{{ $userName }}</a>
+                            @endif --}}
                             @if (Auth::check() === true)
                                 <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}">
                                     <i class="fas fa-user mr-2"></i>Profile</a>
@@ -97,7 +100,6 @@
                     </a>
                 </li>
             </div>
-
         </div>
 
 
@@ -108,8 +110,7 @@
 </nav>
 <div class="search-box">
     <div class="container">
-        <form class="search-form" role="search" method="GET" id="key"
-            action="{{ route('home.search') }}">
+        <form class="search-form" role="search" method="GET" id="key" action="{{ route('home.search') }}">
             <input class="form-inline" type="text" name="keyword" placeholder="Tìm Kiếm">
         </form>
 

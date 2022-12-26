@@ -16,6 +16,8 @@ class UpdateProfileRequest extends FormRequest
         return true;
     }
 
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,10 +26,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|max:1024',
+            'image' => 'required|max:10000',
             'name' => 'required|max:255',
             'phone' => 'required|regex:/^([0-9]*)$/|max:11',
-            'email' => 'required|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/|unique:users,email,'.$this->id,
+            'email' => 'required' ,
 
         ];
     }
@@ -43,6 +45,9 @@ class UpdateProfileRequest extends FormRequest
             'email.max' => trans('Email nhiều nhất có :max' ),
             'email.email' => trans('Email phải đúng định dạng'),
             'email.unique' => trans('Email này đã được sử dựng'),
+            'image.required' => trans('Ảnh đại diện không được để trống'),
+            'image.max' => trans('Ảnh đại diện có dung lượng lớn nhất là ::max GB' ),
+            'image.image' => trans('Ảnh đại diện phải đúng định dạng'),
             'password.required' => trans('Mật khẩu không được để trống'),
             'password.regex' => trans('Mật khẩu chứa kí tự đặc biệt' ),
             'password.max' => trans('Mật khẩu nhiều nhất có :max kí tự' ),

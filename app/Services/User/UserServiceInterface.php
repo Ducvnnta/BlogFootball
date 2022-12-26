@@ -12,4 +12,6 @@ interface UserServiceInterface
 
     public function checkTokenDeviceExists($deviceToken);
 
+    public function updateProfile($request);
+
 }
