@@ -23,7 +23,7 @@
                 <h1 class="detail-news-tittle">{{ $news->title }}</h1>
                 <p class="detail-new-create-at>">Ngày đăng :{{ $news->created_at }}</p>
                 <div class="detail-news-img"><img  class="img-detail" src="{{ $news->image_url }}"/></div>
-                <h5 class="detail-new-detail">{{!!$news->detail!!}}</h5>
+                <h5 class="detail-new-detail">{!!$news->detail!!}</h5>
             </div>
             <div class="row no-gutters">
                 <div class="col-12 newhome">
@@ -56,7 +56,7 @@
                                     <div class="post-detainews">
                                         <div  class="detail-schedule-create-at">{{ $show ->created_at }}</div>
                                         <a class="detail-schedule-tittle" href="{{ route('web.news.show', $show->id) }}">{{ $show ->title }}</a>
-                                        <h5 class="detail-schedule-detail">{{ $show ->description }}</h5>
+                                        <h5 class="detail-schedule-detail">{!! $show ->description  !!}</h5>
                                     </div>
                                 </div>
                             </div>

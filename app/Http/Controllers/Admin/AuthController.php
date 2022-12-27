@@ -76,9 +76,16 @@ class AuthController extends BaseController
     public function postLogin(AdminLoginRequest $request){
       $data = $request->getData();
       $remember = $request->get('remember');
-      if (auth('admin')->attempt($data, $remember)) {
+
+      if(Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false )
+      {
+        return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
+      }
+
+      if (Auth::guard('admin')->attempt($data, $remember)) {
+
         return redirect()->route('admin.dashboard');
-      }else if(auth('web')->attempt($data, $remember))
+      }else if(Auth::guard('web')->attempt($data, $remember))
       {
         return redirect()->route('web.home');
       }

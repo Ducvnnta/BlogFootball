@@ -97,6 +97,12 @@
                 transform: translateX(25%);
             }
         }
+        .alert-error{
+            color: #ff000c;
+            background-color: #f7cad0;
+            border-color: #cf626b;
+        }
+
     </style>
     </head>
 
@@ -124,6 +130,23 @@
                             @endphp
                         </div>
                     @endif
+
+                    @if (Session::has('error'))
+                    <div class="alert alert-error">
+                        {{ Session::get('error') }}
+                        @php
+                            Session::forget('error');
+                        @endphp
+                    </div>
+                    @endif
+{{-- 
+                    <div class="form-outline flex-fill mb-0">
+                        <input type="text" name="phone" class="form-control"
+                            placeholder="Your Phone" />
+                        @if ($errors->has('phone'))
+                            <span class="text-danger">{{ $errors->first('phone') }}</span>
+                        @endif
+                    </div> --}}
                     {!! Form::open()->post()->route('admin.login.post') !!}
                     {!! Form::text('email')->type('email')->attrs(['class' => 'form-control-lg'])->placeholder('Email') !!}
                     {!! Form::text('password')->type('password')->attrs(['class' => 'form-control-lg'])->placeholder('Password') !!}
