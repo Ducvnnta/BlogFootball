@@ -33,6 +33,7 @@ Route::middleware('auth:admin')->group(function () {
   Route::prefix('news')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
 
+
     Route::get('/create', [NewsController::class, 'create'])->name('admin.news.create');
 
     Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('admin.news.edit');
@@ -40,4 +41,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/store', [NewsController::class, 'store'])->name('admin.news.store');
     Route::get('/delete/{id}', [NewsController::class, 'destroy'])->name('admin.news.delete');
   });
+  Route::prefix('users')->group(function () {
+    Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+
+});
+
 });

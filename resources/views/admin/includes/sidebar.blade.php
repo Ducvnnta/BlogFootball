@@ -28,6 +28,52 @@
                     </a>
                   </li>
 
+                  <li class="nav-item ">
+                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                      <i class="fab fa-fw fa-wpforms"></i>Quản trị viên
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item ">
+                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                      <i class="fab fa-fw fa-wpforms"></i>Thành viên
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-divider">
+                    Cài đặt chung
+                </li>
+
+                <li class="nav-item ">
+                  <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <i class="fab fa-fw fa-wpforms"></i>Setting
+                    <span class="badge badge-success">6</span>
+                  </a>
+                </li>
+
+                <li class="nav-item ">
+                  <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <i class="fab fa-fw fa-wpforms"></i>Phân quyền
+                    <span class="badge badge-success">6</span>
+                  </a>
+                </li>
+
+                <li class="nav-item ">
+                  <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <i class="fab fa-fw fa-wpforms"></i>Chính sách khách hàng
+                    <span class="badge badge-success">6</span>
+                  </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                      <i class="fab fa-fw fa-wpforms"></i>Quảng cáo
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+
               </ul>
           </div>
       </nav>
