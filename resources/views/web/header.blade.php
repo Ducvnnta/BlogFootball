@@ -14,9 +14,9 @@
                         Tin tức giải đấu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach (\App\Models\Category::all() as $item0)
+                        @foreach (\App\Models\Category::all() as $item)
                             <a class="dropdown-item"
-                                href="{{ route('web.news.category', $item0->id) }}">{{ $item0->name }}</a>
+                                href="{{ route('web.news.category', $item->id) }}">{{ $item->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -45,7 +45,7 @@
                     </div>
                 </li>
             </ul>
-            <div class="my-2 my-lg-0">
+            <div class="my-2 my-lg-0" >
                 <button class="btn btn-search btn-outline-success my-2 my-sm-0" type="submit"><i
                         class="fas fa-search"></i></button>
             </div>
@@ -59,12 +59,16 @@
                     $userName = Auth::user()->name;
                 @endphp
             @endif
-            <div style="padding-bottom: 50px">
-                <li class="nav-item dropdown">
+            @if (Auth::check() === true)
+
+                <li class=" my-2 my-lg-0 nav-item dropdown" style="list-style: none;">
                     <a class="nav-link nav-user-img"  id="navbarDropdownMenuLink2" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-
-                        <div>
+                        <div class="my-2 my-lg-0">
+                            <button class="btn btn-profile btn-outline-success my-2 my-sm-0" type="submit"><i
+                                    class="fas fa-user-alt"></i></button>
+                        </div>
+                        {{-- <div>
                             @if (Auth::check() === false)
                                 <a href="{{ route('auth.login') }}">
                                     <div class=" box-1">
@@ -80,26 +84,32 @@
                                     </div>
                                 </div>
                             @endif
-                        </div>
+                        </div> --}}
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                             aria-labelledby="navbarDropdownMenuLink2">
                             {{-- @if (Auth::check() === true)
                                 <a class="dropdown-item">
                                     <i class="fas fa-user mr-2"></i>{{ $userName }}</a>
                             @endif --}}
-                            @if (Auth::check() === true)
                                 <a class="dropdown-item" href="{{ route('auth.profile', Auth::user()->id) }}">
                                     <i class="fas fa-user mr-2"></i>Profile</a>
-                            @endif
-                            <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                            @if (Auth::check() === true)
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="{{ route('auth.logout') }}"><i
                                         class="fas fa-power-off mr-2"></i>Logout</a>
-                            @endif
+
                         </div>
                     </a>
                 </li>
-            </div>
+                @else
+                <div class="my-2 my-lg-0" style="margin-left: 10px;">
+                    <a href="{{ route('auth.login') }}">
+
+                    <button class="btn btn-profile btn-outline-success my-2 my-sm-0" type="submit"><i
+                            class="fas fa-user-alt"></i></button></a>
+                </div>
+                @endif
+
+
         </div>
 
 

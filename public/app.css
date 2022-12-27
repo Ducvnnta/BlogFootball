@@ -122,7 +122,6 @@ body{
 .box-1{
     height: auto;
     width: auto;
-    margin-left: 10px;
     justify-content: center;
     align-items: center;
 }
@@ -144,6 +143,7 @@ body{
 */
 .btn-one {
     color: #FFF;
+    width: 100%;
     transition: all 0.3s;
     position: relative;
   }

@@ -118,15 +118,15 @@
                     <div class="col col-lg-9 col-xl-7">
                         <div class="card">
                             <div class="rounded-top text-white d-flex flex-row"
-                                style="background-color: #000; height:200px;">
-                                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 215px">
+                                style="background-color: #ebe6e6; height:200px;">
+                                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 215px; ">
                                     @if (!is_null($user->image))
                                         <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                             src="{{ asset($user->image) }}" alt="profile_image"
-                                            style="width: 150px; height: 215px; z-index: 1">
+                                            style="width: 150px; height: 215px; z-index: 1; border: 3px solid #121112;">
                                     @else
                                         <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                            style="width: 150px; height: 215px; z-index: 1">
+                                            style="width: 150px; height: 215px; z-index: 1; border: 3px solid #121112;">
                                     @endif
 
                                     @if (Auth::guard('admin')->check())
@@ -144,10 +144,18 @@
                                         </a>
                                     @endif
                                 </div>
-
+                                @if (Auth::guard('admin')->check())
+                                    @php
+                                        $role = 'Quản trị viên';
+                                    @endphp
+                                @else
+                                    @php
+                                        $role = 'Thành viên';
+                                    @endphp
+                                @endif
                                 <div class="ms-3" style="margin-top: 120px; margin-left:26px">
-                                    <h5>{{ $user->name }}</h5>
-                                    <p>New York</p>
+                                    <h5 style="color: #121112">{{ $user->name }}</h5>
+                                    <p style="color: #121112">{{ $role }}</p>
                                 </div>
                             </div>
                             <div class="p-4 text-black" style="background-color: #f8f9fa;">
@@ -164,12 +172,7 @@
                                         <p class="mb-1 h5">478</p>
                                         <p class="small text-muted mb-0">Following</p>
                                     </div>
-                                    <div style="margin-left: 5px">
-                                        <a href="{{ route('web.home') }}">
-                                            <p class="mb-1 h5"><i class="fa-thin fa-house-user"></i></p>
-                                            <p class="small text-muted mb-0">Home</p>
-                                        </a>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-body p-4 text-black">
