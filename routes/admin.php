@@ -34,8 +34,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
 
 
-    Route::get('/create', [NewsController::class, 'create'])->name('admin.news.create');
 
+    Route::get('/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::get('/detail/{id}', [NewsController::class, 'detail'])->name('admin.news.detail');
     Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('admin.news.edit');
     Route::put('/update/{id}', [NewsController::class, 'update'])->name('admin.news.update');
     Route::post('/store', [NewsController::class, 'store'])->name('admin.news.store');

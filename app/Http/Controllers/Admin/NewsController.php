@@ -26,6 +26,12 @@ class NewsController extends BaseController
         return view('admin.news.create', compact('categories'));
     }
 
+    public function detail($id)
+    {
+        $new = News::find($id);
+        return view('admin.news.detail', compact('new'));
+    }
+
     public function store(CreateNewsRequest $request)
     {
         try {

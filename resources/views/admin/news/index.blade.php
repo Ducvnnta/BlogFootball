@@ -34,8 +34,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header card-header-with-button">
-                      <h5 class="mb-0 card-header-title">Quản lý tin tức</h5>
-                      <a href="{{route('admin.news.create')}}" class="btn btn-sm btn-success">Thêm mới</a>
+                        <h5 class="mb-0 card-header-title">Quản lý tin tức</h5>
+                        <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Thêm mới</a>
+                        {{-- <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Import</a>
+                        <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Xuất</a> --}}
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -58,38 +61,42 @@
                                             <td>{{ $item->id }}</td>
                                             <td>
                                                 <div class="m-r-10">
-                                                    <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="rounded" width="45">
+                                                    <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                                                        class="rounded" width="45">
                                                 </div>
                                             </td>
                                             <td>{{ $item->title }}</td>
                                             <td>{{ optional($item->category)->name }}</td>
                                             <td>
-                                                <a href="{{ $item->link }}" target="_blank">Xem</a>
-                                            </td>
-                                            <td class="no-wrap"><span class="badge-dot badge-brand mr-1"></span> {{ $item->source }}</td>
-                                            <td class="no-wrap">{{ $item->created_at }}</td>
-                                            <td>
-                                              <div class="btn-groups mt-0">
-                                                  <a class="btn btn-info btn-xs" href="{{route('admin.news.edit', $item->id)}}">
-                                                    <i class="fas fa-info-circle"></i>
-                                                  </a>
-                                                  <a class="btn btn-danger btn-xs delete-confirm" href="{{route('admin.news.delete', $item->id)}}">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                  </a>
-                                              </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
                         </div>
-                    </div>
-                    <div class="card-footer navigation">
-                        {{ $news->onEachSide(2)->links() }}
+                        </td>
+                        <td class="no-wrap"><span class="badge-dot badge-brand mr-1"></span> {{ $item->source }}</td>
+                        <td class="no-wrap">{{ $item->created_at }}</td>
+                        <td>
+                            <div class="btn-groups mt-0">
+                                <a class="btn btn-info btn-xs " href="{{ route('admin.news.detail', $item->id) }}"> Xem</a>
+
+                                <a class="btn btn-info btn-xs" href="{{ route('admin.news.edit', $item->id) }}">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                                <a class="btn btn-danger btn-xs delete-confirm"
+                                    href="{{ route('admin.news.delete', $item->id) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <!-- ============================================================== -->
+                <div class="card-footer navigation">
+                    {{ $news->onEachSide(2)->links() }}
+                </div>
         </div>
+        </div>
+        <!-- ============================================================== -->
+    </div>
     </div>
 @endsection

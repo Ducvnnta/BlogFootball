@@ -32,10 +32,13 @@ class HomeController extends Controller
             $keyword = preg_replace('/\s+/', '%', $keyword);
             $query = $query->where('title', 'LIKE', "%$keyword%")
                            ->orWhere('description', 'LIKE', "%$keyword%")
-                           ->orWhere('name','LIKE',"%$keyword%");
+                           ->orWhere('detail','LIKE',"%$keyword%")
+                           ->whereHas('category', function ($q) use ($keyword) {
+                            $q->where('categories.name', $keyword);
+                           });
        }
        $news = $query->paginate(4);
-       return view ('web.search',compact('news'));
+       return view('web.search' , compact('news'));
    }
 
 
