@@ -22,7 +22,23 @@
             <div class="post-detainews">
                 <h1 class="detail-news-tittle">{{ $news->title }}</h1>
                 <p class="detail-new-create-at>">Ngày đăng :{{ $news->created_at }}</p>
-                <div class="detail-news-img"><img  class="img-detail" src="{{ $news->image_url }}"/></div>
+                <div class="detail-news-img"><img  class="img-detail" src="{{ $news->image_url }}"/>
+                </div>
+                @php
+                    dd(Auth::user());
+                    
+                @endphp
+
+                <div class="d-flex mb-3" style="margin-top: 20px">
+                    <a href="">
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/18.webp" class="border rounded-circle me-2"
+                            alt="Avatar" style="height: 40px" />
+                    </a>
+                    <div class="form-outline w-100" style="margin-left: 10px">
+                        <textarea class="form-control" id="textAreaExample" rows="2"></textarea>
+                        <label class="form-label" for="textAreaExample">Write a comment</label>
+                    </div>
+                </div>
                 <h5 class="detail-new-detail">{!!$news->detail!!}</h5>
             </div>
             <div class="row no-gutters">
