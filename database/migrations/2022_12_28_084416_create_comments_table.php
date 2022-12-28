@@ -16,19 +16,16 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('text');
-                                                                                                                                                            // $table->unsignedBigInteger('shift_id')->nullable();
-            // $table->foreign('shift_id')->references('id')->on('shifts');
-
-            $table->unsignedBigInteger('user_id')->foreign('user_id')
-                ->references('id')
-                ->on('users');
-
-            $table->unsignedBigInteger('new_id')->foreign('new_id')
-                ->references('id')
-                ->on('news');
-
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('new_id');
+            $table->boolean('is_start')->default('0');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->index(['user_id']);
+
+            $table->foreign('new_id')->references('id')->on('news')->onDelete('NO ACTION')->onUpdate('NO ACTION');
+            $table->index(['new_id']);
         });
     }
 
