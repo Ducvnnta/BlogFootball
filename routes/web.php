@@ -43,6 +43,9 @@ Route::get('register', function () {
     return view('web.news.register');
 })->name('auth.register');
 
+Route::get('detail', function () {
+    return view('admin.news.detail');
+})->name('admin.detail');
 
 Route::get('/',  [HomeController::class, 'titlehot'])->name('web.home');
 

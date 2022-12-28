@@ -14,9 +14,9 @@
                         Tin tức giải đấu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach (\App\Models\Category::all() as $item)
+                        @foreach (\App\Models\Category::all() as $itemNews)
                             <a class="dropdown-item"
-                                href="{{ route('web.news.category', $item->id) }}">{{ $item->name }}</a>
+                                href="{{ route('web.news.category', $itemNews->id) }}">{{ $itemNews->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -26,9 +26,9 @@
                         Bảng xếp hạng
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach (\App\Models\RankCategory::all() as $item1)
+                        @foreach (\App\Models\RankCategory::all() as $itemRank)
                             <a class="dropdown-item"
-                                href="{{ route('web.news.rank', $item1->id) }}">{{ $item1->name }}</a>
+                                href="{{ route('web.news.rank', $itemRank->id) }}">{{ $itemRank->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -38,9 +38,9 @@
                         Lịch thi đấu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach (\App\Models\ScheduleCategory::all() as $item2)
+                        @foreach (\App\Models\ScheduleCategory::all() as $itemSchedule)
                             <a class="dropdown-item"
-                                href="{{ route('web.news.schedule', $item2->id) }}">{{ $item2->name }}</a>
+                                href="{{ route('web.news.schedule', $itemSchedule->id) }}">{{ $itemSchedule->name }}</a>
                         @endforeach
                     </div>
                 </li>
