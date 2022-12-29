@@ -23,6 +23,9 @@ class CreateSchedulesTable extends Migration
             $table->string('time');
             $table->date('date');
             $table->timestamps();
+
+            $table->index(['schedule_category_id']);
+
         });
     }
 

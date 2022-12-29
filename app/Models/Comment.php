@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
@@ -19,7 +18,8 @@ class Comment extends Model
      */
     protected $fillable = [
         'user_id',
-        'post_id',
+        'new_id',
+        'text',
         'is_start',
         'detail'
     ];
@@ -43,5 +43,7 @@ class Comment extends Model
     {
         return $this->belongsToMany(News::class);
     }
+
+
 
 }

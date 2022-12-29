@@ -106,7 +106,6 @@ class UserService implements UserServiceInterface
     {
         $id = Auth::id();
         $data = $request->getListAdminUser();
-        dd($request->hasFile('image'));
 
         // if($data['image']){
             // $data['image'] = $this->uploadImage($data['image'], 'avatar');
@@ -121,14 +120,12 @@ class UserService implements UserServiceInterface
             //     ->with('image', $filename);
         //   }
         $image = $request->file('image')->store('backend/images');
-        dd($image);
           if($data['image']){
             $file= $data['image'];
             $filename= date('YmdHi').$file;
             $file->move(public_path('public/backend/images'), $filename);
             $data['image']= $filename;
         }
-        dd($data['image']);
         // $path = $request->file('image')->store('image');
 
         // if (!is_null($request->image)) {
