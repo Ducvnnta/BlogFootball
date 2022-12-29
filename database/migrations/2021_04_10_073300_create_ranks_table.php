@@ -24,6 +24,8 @@ class CreateRanksTable extends Migration
             $table->integer('score');
             $table->integer('rank');
             $table->timestamps();
+
+            $table->index(['rank_category_id']);
         });
     }
 

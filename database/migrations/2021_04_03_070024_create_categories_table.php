@@ -19,6 +19,9 @@ class CreateCategoriesTable extends Migration
             $table->string('slug');
             $table->string('source');
             $table->timestamps();
+
+            $table->index(['name']);
+
         });
     }
 

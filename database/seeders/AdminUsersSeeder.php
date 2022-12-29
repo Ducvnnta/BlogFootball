@@ -51,8 +51,8 @@ class AdminUsersSeeder extends Seeder
 
             $userRecord = [
                 'is_admin' => 0,
-                'name' => 'normal user',
-                'email' => 'user@gmail.com',
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('user123'),
                 'phone' => '012345678',
                 'email_verified_at' => now(),
@@ -63,8 +63,8 @@ class AdminUsersSeeder extends Seeder
 
             $adminRecord = [
                 'is_admin' => 1,
-                'name' => 'admin',
-                'email' => 'admin@gmail.com',
+                'name' => 'super admin',
+                'email' => 'superadmin@gmail.com',
                 'password' => Hash::make('admin123'),
                 'phone' => '012345678',
                 'email_verified_at' => now(),

@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
     public function registerServices() //user
     {
         $this->app->bind(
-            \App\Services\Post\PostServiceInterface::class,
-            \App\Services\Post\PostService::class,
+            \App\Services\News\NewsServiceInterface::class,
+            \App\Services\News\NewsService::class,
         );
 
         $this->app->bind(
@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
     public function registerRepository() //admin
     {
         $this->app->bind(
-            \App\Repositories\Post\PostRepositoryInterface::class,
-            \App\Repositories\Post\PostReponsitory::class,
+            \App\Repositories\News\NewsRepositoryInterFace::class,
+            \App\Repositories\News\NewsReponsitory::class,
         );
 
         $this->app->bind(

@@ -23,12 +23,16 @@ class CreateNewsTable extends Migration
             $table->text('image_url')->nullable();
             $table->text('link')->nullable();
             $table->text('source');
+            $table->bigInteger('reads')->unsigned()->default(0)->index();
 
             $table->foreign('category_id')
                   ->references('id')
                   ->on('categories')
                   ->onDelete('cascade');
             $table->timestamps();
+
+            $table->index(['category_id']);
+
         });
     }
 

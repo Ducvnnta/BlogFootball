@@ -20,6 +20,7 @@ class News extends Model
       'slug',
       'description',
       'detail',
+      'reads',
       'image_url',
       'link',
       'source'
@@ -27,5 +28,9 @@ class News extends Model
 
     public function category(){
       return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'new_id', 'id');
     }
 }
