@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,6 +43,7 @@
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
+
         <div class="dashboard-wrapper">
             <div class="dashboard-ecommerce">
                 @yield('admin_content')
@@ -76,5 +77,5 @@
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script src="backend/libs/js/main-js.js"></script>
 </body>
- 
+
 </html>

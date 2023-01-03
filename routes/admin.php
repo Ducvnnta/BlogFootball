@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EditorController;
@@ -32,8 +33,7 @@ Route::middleware('auth:admin')->group(function () {
 
   Route::prefix('news')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
-
-
+    Route::get('/category', [NewsController::class, 'category'])->name('admin.category');
 
     Route::get('/create', [NewsController::class, 'create'])->name('admin.news.create');
     Route::get('/detail/{id}', [NewsController::class, 'detail'])->name('admin.news.detail');
@@ -42,9 +42,23 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/store', [NewsController::class, 'store'])->name('admin.news.store');
     Route::get('/delete/{id}', [NewsController::class, 'destroy'])->name('admin.news.delete');
   });
-  Route::prefix('users')->group(function () {
-    Route::get('/', [NewsController::class, 'index'])->name('admin.news');
 
-});
+  Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'category'])->name('admin.category');
+
+    Route::get('/edit/{id}', [CategoryController::class, 'editCategory'])->name('admin.category.edit');
+    Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+
+    Route::get('/create', [CategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/create', [CategoryController::class, 'store'])->name('admin.category.store');
+
+    Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+
+  });
+//   Route::prefix('users')->group(function () {
+//     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+//     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+
+// });
 
 });

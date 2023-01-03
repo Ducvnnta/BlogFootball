@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Exceptions\Handler;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\News;
-use App\Repositories\News\NewsRepositoryInterFace;
+use App\Repositories\News\NewsRepositoryInterface;
 use App\Services\News\NewsServiceInterface;
 use App\Traits\ApiResponser;
 use App\Traits\UploadTrait;
@@ -28,7 +29,7 @@ class NewController extends Controller
      * @return void
      */
     public function __construct(
-        NewsRepositoryInterFace $newsRepository,
+        NewsRepositoryInterface $newsRepository,
         NewsServiceInterface $newsService
     ) {
         // $this->middleware('guest:admin')->except('logout');
@@ -47,6 +48,7 @@ class NewController extends Controller
         })->count();
         $new = News::all()->random(10);
         $categories = Category::limit(8)->get();
+        // Event::fire(new Handler(), $news);
         return view('web.news.show', compact('news','categories','new', 'view', 'comment'));
     }
 

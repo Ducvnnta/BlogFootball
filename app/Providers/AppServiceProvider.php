@@ -29,18 +29,28 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\User\UserServiceInterface::class,
             \App\Services\User\UserService::class,
         );
+
+        $this->app->bind(
+            \App\Services\Category\CategoryServiceInterface::class,
+            \App\Services\Category\CategoryService::class,
+        );
     }
 
     public function registerRepository() //admin
     {
         $this->app->bind(
-            \App\Repositories\News\NewsRepositoryInterFace::class,
+            \App\Repositories\News\NewsRepositoryInterface::class,
             \App\Repositories\News\NewsReponsitory::class,
         );
 
         $this->app->bind(
             \App\Repositories\User\UserRepositoryInterface::class,
             \App\Repositories\User\UserRepository::class,
+        );
+
+        $this->app->bind(
+            \App\Repositories\Category\CategoryRepositoryInterface::class,
+            \App\Repositories\Category\CategoryReponsitory::class,
         );
 
     }

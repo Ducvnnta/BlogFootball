@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
+use App\Http\Requests\ApiValidationRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateNewsRequest extends FormRequest
+class CreateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +25,14 @@ class CreateNewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'image_url' => 'required|image|max:10000',
-            'category_id' => 'required',
-            'description' => 'required',
-            'detail' => 'required',
-            'link' => 'required',
+            'name' => 'required|max:255',
+            // 'image' => 'required|image|max:10000',
             'source' => 'required',
+            'slug' => 'required'
         ];
     }
 
     public function getData(){
-      return $this->only(['title', 'description', 'detail', 'link', 'source', 'category_id']);
+      return $this->only(['name', 'source', 'slug']);
     }
 }

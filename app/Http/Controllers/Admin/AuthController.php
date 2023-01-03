@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class AuthController extends BaseController
+class AuthController extends Controller
 {
     use ApiResponser;
 
@@ -60,16 +60,6 @@ class AuthController extends BaseController
     public function register(RegisterUserRequest $request)
     {
         $result = $this->userService->registerUser($request);
-        if (!$result) {
-            $message = 'Unable To Register User.';
-            $statusCode = Response::HTTP_BAD_REQUEST;
-
-            return $this->errorResponse($message, $statusCode);
-        }
-
-        $message = 'Successfully register';
-        $statusCode = Response::HTTP_OK;
-
         return redirect()->route('auth.login')->with('success', 'Bạn đã tạo tài khoản thành công');
     }
 

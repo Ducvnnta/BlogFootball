@@ -48,25 +48,28 @@ class AuthController
         $this->userService = $userService;
     }
 
-    public function login(){
-      return view('admin.auth.login');
+    public function login()
+    {
+        return view('admin.auth.login');
     }
 
-    public function registration(){
+    public function registration()
+    {
         return view('web.news.register');
     }
 
-    public function edit(){
+    public function edit()
+    {
         $user = $this->userRepository->checkAuthUserAdmin();
         return view('admin.auth.editProfile', compact('user'));
     }
 
     public function upload(Request $request)
     {
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('images',$filename,'public');
-            Auth()->user()->update(['image'=>$filename]);
+            $request->image->storeAs('images', $filename, 'public');
+            Auth()->user()->update(['image' => $filename]);
         }
         return redirect()->back();
     }
@@ -91,18 +94,19 @@ class AuthController
         return redirect()->route('auth.login')->with('success', 'Bạn đã tạo tài khoản thành công');
     }
 
-    public function postLogin(AdminLoginRequest $request){
-      $data = $request->getData();
-      $remember = $request->get('remember');
-      if (auth('admin')->attempt($data, $remember)) {
-        return redirect()->route('admin.dashboard');
-      }else if(auth('web')->attempt($data, $remember))
-      {
-        return redirect()->route('web.home');
-      }
+    public function postLogin(AdminLoginRequest $request)
+    {
+        $data = $request->getData();
+        $remember = $request->get('remember');
+        if (auth('admin')->attempt($data, $remember)) {
+            return redirect()->route('admin.dashboard');
+        } else if (auth('web')->attempt($data, $remember)) {
+            return redirect()->route('web.home');
+        }
     }
 
-    public function getMe(){
+    public function getMe()
+    {
         $user = $this->userRepository->checkAuthUserAdmin();
         return view('admin.auth.profile', compact('user'));
     }
@@ -110,22 +114,22 @@ class AuthController
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
-        $data = $request->getDataUser();
-        $user = $this->userRepository->checkAuthUserAdmin();
+            $data = $request->getDataUser();
+            $user = $this->userRepository->checkAuthUserAdmin();
 
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $data['image'] = $this->uploadImage($image, 'avatars');
-          }else{
-            $data['image'] = $request->get('image');
-          }
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $data['image'] = $this->uploadImage($image, 'avatars');
+            } else {
+                $data['image'] = $request->get('image');
+            }
 
-        $user->update($data);
+            $user->update($data);
 
-        return view('admin.auth.profile', compact('user'));
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors($e->getMessage());
-    } //end try
+            return view('admin.auth.profile', compact('user'));
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        } //end try
     }
 
 
@@ -149,6 +153,4 @@ class AuthController
 
         return redirect()->route('web.home');
     }
-
-
 }
