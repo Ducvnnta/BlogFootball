@@ -20,6 +20,19 @@ class NewsController extends BaseController
         return view('admin.news.index', compact('news'));
     }
 
+    // public function category()
+    // {
+    //     $categories = Category::with('categories')->latest()->paginate(10);
+    //     return view('admin.category.category', compact('categories'));
+    // }
+
+    // public function editCategory($id)
+    // {
+    //     $category = Category::find($id);
+    //     return view('admin.category.edit', compact('category'));
+    // }
+
+
     public function create()
     {
         $categories = Category::all()->pluck('name', 'id');

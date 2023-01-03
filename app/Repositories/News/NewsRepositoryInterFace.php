@@ -3,7 +3,7 @@
 namespace App\Repositories\News;
 
 
-interface NewsRepositoryInterFace
+interface NewsRepositoryInterface
 {
     public function incrementReadCount($id);
 

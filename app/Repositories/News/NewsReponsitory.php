@@ -5,7 +5,7 @@ namespace App\Repositories\News;
 use App\Models\News;
 use App\Repositories\BaseRepository;
 
-class NewsReponsitory extends BaseRepository implements NewsRepositoryInterFace
+class NewsReponsitory extends BaseRepository implements NewsRepositoryInterface
 {
     //lấy model tương ứng
     public function getModel()

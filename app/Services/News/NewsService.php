@@ -2,20 +2,20 @@
 
 namespace App\Services\News;
 
-use App\Repositories\News\NewsRepositoryInterFace;
+use App\Repositories\News\NewsRepositoryInterface;
 
 class NewsService implements NewsServiceInterface
 {
    /**
-     * @var $newsRepositoryInterFace
+     * @var $newsRepositoryInterface
      * @var $sendMailService
      */
     protected $newsRepositoryInterFace;
 
     public function __construct(
-        NewsRepositoryInterFace $newsRepositoryInterFace
+        NewsRepositoryInterface $newsRepositoryInterface
     ) {
-        $this->newsRepositoryInterFace = $newsRepositoryInterFace;
+        $this->newsRepositoryInterface = $newsRepositoryInterface;
     }
 
     public function getPostById($id)

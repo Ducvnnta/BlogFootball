@@ -27,6 +27,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen('web.news.show', 'App\Exceptions\Handler');
     }
 }

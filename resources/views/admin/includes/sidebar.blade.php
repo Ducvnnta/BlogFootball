@@ -18,17 +18,40 @@
                   </li>
 
                   <li class="nav-divider">
-                      Quản lý
+                      Quản lý tin tức
                   </li>
 
                   <li class="nav-item ">
-                    <a class    ="nav-link" href="{{route('admin.news')}}">
-                      <i class="fab fa-fw fa-wpforms"></i>Tin tức
+                    <a class="nav-link" href="{{route('admin.news')}}">
+                      <i class="fab fa-fw fa-wpforms"></i>Bài đăng
                       <span class="badge badge-success">6</span>
                     </a>
                   </li>
 
                   <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('admin.category') }}">
+                      <i class="fab fa-fw fa-wpforms"></i>Danh mục
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-item ">
+                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                      <i class="fab fa-fw fa-wpforms"></i>Bảng xếp hạng
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="{{route('admin.news')}}">
+                      <i class="fab fa-fw fa-wpforms"></i>Lịch thi đấu
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-divider">
+                    Quản lý user
+                </li>
+                <li class="nav-item ">
                     <a class    ="nav-link" href="{{route('admin.news')}}">
                       <i class="fab fa-fw fa-wpforms"></i>Quản trị viên
                       <span class="badge badge-success">6</span>
@@ -41,6 +64,7 @@
                       <span class="badge badge-success">6</span>
                     </a>
                   </li>
+
 
                   <li class="nav-divider">
                     Cài đặt chung
