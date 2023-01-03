@@ -18,11 +18,10 @@ class NewsReponsitory extends BaseRepository implements NewsRepositoryInterface
         return $this->model->select('product_name')->take(5)->get();
     }
 
-    public function incrementReadCount($id) {
-        $news = News::find($id);
-        $news->increment('reads', 1);
+    public function incrementReadCount($new) {
+        $new->increment('reads', 1);
 
-        return $news->save();
+        return $new->save();
     }
 
 

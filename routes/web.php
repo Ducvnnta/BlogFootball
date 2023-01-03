@@ -48,9 +48,7 @@ Route::get('detail', function () {
 })->name('admin.detail');
 
 Route::get('/',  [HomeController::class, 'titlehot'])->name('web.home');
-Route::group(['middleware' => 'filter'], function() {
 Route::get('/tin-tuc/{id}', [NewController::class, 'show'])->name('web.news.show');
-});
 Route::get('/bang-xep-hang/{id}',[RankController::class, 'rankdetail'])->name('web.news.rank');
 
 Route::get('/lich-thi-dau/{id}',[ScheduleController::class, 'scheduledetail'])->name('web.news.schedule');

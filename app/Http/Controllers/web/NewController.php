@@ -40,7 +40,7 @@ class NewController extends Controller
 
     public function show($id){
         $news = News::findOrFail($id);
-        $icre = $this->newsRepository->incrementReadCount($id);
+        $icre = $this->newsRepository->incrementReadCount($news);
         $view =  $news->reads;
         $comment = $news->whereHas('comments', function ($q)
         {
@@ -48,7 +48,6 @@ class NewController extends Controller
         })->count();
         $new = News::all()->random(10);
         $categories = Category::limit(8)->get();
-        // Event::fire(new Handler(), $news);
         return view('web.news.show', compact('news','categories','new', 'view', 'comment'));
     }
 
