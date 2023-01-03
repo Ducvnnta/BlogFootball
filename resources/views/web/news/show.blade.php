@@ -28,6 +28,8 @@
                     dd(Auth::user());
 
                 @endphp --}}
+                <h5 class="detail-new-detail" style="margin-top: 30px">{!! $news->detail !!}</h5>
+
                     <div class="d-flex justify-content-between mb-3" style="margin-top: 30px">
                         <div style="margin-left: 50px">
                             <a href="">
@@ -62,7 +64,6 @@
                             <label class="form-label" for="textAreaExample">Write a comment</label>
                         </div>
                     </div>
-                    <h5 class="detail-new-detail">{!! $news->detail !!}</h5>
                     <div class="float-end mt-2 pt-1">
                         <button type="button" class="btn btn-primary btn-sm" >Post comment</button>
                         <button type="button" class="btn btn-outline-primary btn-sm" value="clear" onclick="javascript:eraseText();">Cancel</button>

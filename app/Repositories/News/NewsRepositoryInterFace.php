@@ -5,7 +5,7 @@ namespace App\Repositories\News;
 
 interface NewsRepositoryInterface
 {
-    public function incrementReadCount($id);
+    public function incrementReadCount($new);
 
     public function getAll();
 }

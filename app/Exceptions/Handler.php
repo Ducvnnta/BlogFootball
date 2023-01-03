@@ -3,10 +3,11 @@
 namespace App\Exceptions;
 
 use App\Models\News;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionsHandler;
 use Illuminate\Session\Store;
 use Throwable;
 
-class Handler
+class Handler extends ExceptionsHandler
 {
     /**
      * A list of the exception types that are not reported.
@@ -40,32 +41,5 @@ class Handler
         });
     }
 
-    private $session;
 
-    public function __construct(Store $session)
-    {
-        $this->session = $session;
-    }
-
-    public function handle(News $new)
-    {
-        if (!$this->isNewViewed($new)) {
-            $new->increment('reads', 1);
-            $this->storeNew($new);
-        }
-    }
-
-    private function isNewViewed($new)
-    {
-        $viewed = $this->session->get('viewed_new', []);
-
-        return array_key_exists($new->id, $viewed);
-    }
-
-    private function storeNew($new)
-    {
-        $key = 'viewed_new.' . $new->id;
-
-        $this->session->put($key, time());
-    }
 }

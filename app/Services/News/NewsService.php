@@ -2,10 +2,13 @@
 
 namespace App\Services\News;
 
+use App\Models\News;
 use App\Repositories\News\NewsRepositoryInterface;
+use Illuminate\Session\Store;
 
 class NewsService implements NewsServiceInterface
 {
+
    /**
      * @var $newsRepositoryInterface
      * @var $sendMailService
@@ -16,12 +19,14 @@ class NewsService implements NewsServiceInterface
         NewsRepositoryInterface $newsRepositoryInterface
     ) {
         $this->newsRepositoryInterface = $newsRepositoryInterface;
+
     }
 
     public function getPostById($id)
     {
 
     }
+
 
 
 }
