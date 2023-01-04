@@ -9,6 +9,7 @@ use App\Models\Rank;
 use App\Models\RankCategory;
 use App\Models\Schedule;
 use App\Models\ScheduleCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller

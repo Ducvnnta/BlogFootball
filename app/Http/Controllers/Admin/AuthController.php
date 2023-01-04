@@ -40,16 +40,16 @@ class AuthController extends Controller
     }
 
     public function login(){
-      return view('admin.auth.login');
+      return view('auth.login');
     }
 
     public function registration(){
-        return view('web.news.register');
+        return view('auth.register');
     }
 
     public function edit(){
         $user = $this->userRepository->checkAuthUserAdmin();
-        return view('admin.auth.editProfile', compact('user'));
+        return view('auth.editProfile', compact('user'));
     }
 
 
@@ -66,7 +66,8 @@ class AuthController extends Controller
     public function postLogin(AdminLoginRequest $request){
       $data = $request->getData();
       $remember = $request->get('remember');
-
+      if($request->get('back'))
+      return redirect()->$request->get('back');
       if(Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false )
       {
         return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
@@ -77,13 +78,13 @@ class AuthController extends Controller
         return redirect()->route('admin.dashboard');
       }else if(Auth::guard('web')->attempt($data, $remember))
       {
-        return redirect()->route('web.home');
+        return redirect()->back();
       }
     }
 
     public function getMe(){
         $user = $this->userRepository->checkAuthUserAdmin();
-        return view('admin.auth.profile', compact('user'));
+        return view('auth.profile', compact('user'));
     }
 
 

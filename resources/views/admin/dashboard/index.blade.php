@@ -6,6 +6,7 @@
         <!-- pageheader  -->
         <!-- ============================================================== -->
         <div class="row">
+
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
                     <h2 class="pageheader-title">Dashboard</h2>
@@ -128,7 +129,7 @@
                                             <td>{{$item->created_at}}</td>
                                           </tr>
                                         @endforeach
-   
+
                                         <tr>
                                             <td colspan="9"><a href="#" class="btn btn-outline-light float-right">Xem toàn bộ</a></td>
                                         </tr>
