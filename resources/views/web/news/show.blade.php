@@ -25,7 +25,7 @@
                     <div class="detail-news-img"><img class="img-detail" src="{{ $news->image_url }}" />
                     </div>
                     {{-- @php
-                    dd(Auth::user());
+                    dd(Auth::check());
 
                 @endphp --}}
                 <h5 class="detail-new-detail" style="margin-top: 30px">{!! $news->detail !!}</h5>
@@ -64,10 +64,12 @@
                             <label class="form-label" for="textAreaExample">Write a comment</label>
                         </div>
                     </div>
-                    <div class="float-end mt-2 pt-1">
-                        <button type="button" class="btn btn-primary btn-sm" >Post comment</button>
+                    @if (Auth::check())
+                    <div class="float-end mt-2 pt-1" style="justify-content: flex-end; flex-direction: initial; display: flex;">
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-right: 10px">Post comment</button>
                         <button type="button" class="btn btn-outline-primary btn-sm" value="clear" onclick="javascript:eraseText();">Cancel</button>
                       </div>
+                    @endif
                 </div>
                 <div class="row no-gutters">
                     <div class="col-12 newhome">

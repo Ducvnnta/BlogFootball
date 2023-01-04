@@ -40,7 +40,7 @@ Route::get('ranknew', function () {
 });
 
 Route::get('register', function () {
-    return view('web.news.register');
+    return view('admin.auth.register');
 })->name('auth.register');
 
 Route::get('detail', function () {
@@ -59,6 +59,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('user.regist
 Route::get('/registration', [AuthController::class, 'registration'])->name('auth.register');
 
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'postLogin'])->name('auth.user.login');
+
 Route::get('/logout', [AuthController::class, 'logoutAuth'])->name('auth.logout');
 Route::get('/profile', [AuthController::class, 'getMe'])->name('auth.profile');
 

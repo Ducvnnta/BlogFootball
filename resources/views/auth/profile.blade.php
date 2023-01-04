@@ -135,7 +135,7 @@
                                                 data-mdb-ripple-color="dark" style="z-index: 1;">
                                                 Edit profile
                                         </a>
-                                    @else
+                                    @elseif (Auth::guard('web')->check())
                                         <a href="{{ route('auth.edit.profile') }}">
 
                                             <button type="button" class="btn btn-outline-dark"

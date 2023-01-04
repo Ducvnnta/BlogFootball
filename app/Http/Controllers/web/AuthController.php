@@ -50,18 +50,28 @@ class AuthController
 
     public function login()
     {
-        return view('admin.auth.login');
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');
     }
 
     public function registration()
     {
-        return view('web.news.register');
+        return view('auth.register');
     }
 
     public function edit()
     {
         $user = $this->userRepository->checkAuthUserAdmin();
-        return view('admin.auth.editProfile', compact('user'));
+        return view('auth.editProfile', compact('user'));
+    }
+
+    public function getMe()
+    {
+        $user = $this->userRepository->checkAuthUserAdmin();
+        return view('auth.profile', compact('user'));
     }
 
     public function upload(Request $request)
@@ -98,18 +108,27 @@ class AuthController
     {
         $data = $request->getData();
         $remember = $request->get('remember');
-        if (auth('admin')->attempt($data, $remember)) {
-            return redirect()->route('admin.dashboard');
-        } else if (auth('web')->attempt($data, $remember)) {
-            return redirect()->route('web.home');
+
+        $admin = AdminUser::where('email', $request->email)->first();
+        if(is_null($admin))
+        {
+            $user = User::where('email', $request->email)->first();
+        }
+
+        if(Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false )
+        {
+          return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
+        }
+
+        if (Auth::guard('admin')->attempt($data, $remember) && !is_null($admin->is_admin)) {
+          return redirect()->route('admin.dashboard');
+        }else if(Auth::guard('web')->attempt($data, $remember) && is_null($user->is_admin))
+        {
+          return redirect(session()->get('url.intended'));
         }
     }
 
-    public function getMe()
-    {
-        $user = $this->userRepository->checkAuthUserAdmin();
-        return view('admin.auth.profile', compact('user'));
-    }
+
 
     public function updateProfile(UpdateProfileRequest $request)
     {

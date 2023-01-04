@@ -15,7 +15,7 @@ body{
     padding-right: 5px;
 }
 .owl-carousel-slide{
-    padding-top: 5px;
+    padding-top: 80px;
     padding-left: 8px;
     padding-right: 8px;
     background-color: rgb(2, 21, 29)
@@ -24,6 +24,19 @@ body{
     width: 100%;
     height: auto;
 } */
+
+/*
+========================
+      HEADER USER
+========================
+*/
+.header-user{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+}
 .title-name-slide{
     position: absolute;
     z-index: 10;
@@ -110,8 +123,9 @@ body{
 }
 .search-box{
     background-color: rgb(77, 68, 68);
-    position: absolute;
+    position: fixed;
     left: 0;
+    top: 66px;
     height: 40px;
     width: 100%;
     z-index: 2;

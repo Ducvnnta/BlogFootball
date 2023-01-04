@@ -97,12 +97,12 @@
                 transform: translateX(25%);
             }
         }
-        .alert-error{
+
+        .alert-error {
             color: #ff000c;
             background-color: #f7cad0;
             border-color: #cf626b;
         }
-
     </style>
     </head>
 
@@ -132,14 +132,14 @@
                     @endif
 
                     @if (Session::has('error'))
-                    <div class="alert alert-error">
-                        {{ Session::get('error') }}
-                        @php
-                            Session::forget('error');
-                        @endphp
-                    </div>
+                        <div class="alert alert-error">
+                            {{ Session::get('error') }}
+                            @php
+                                Session::forget('error');
+                            @endphp
+                        </div>
                     @endif
-{{-- 
+                    {{--
                     <div class="form-outline flex-fill mb-0">
                         <input type="text" name="phone" class="form-control"
                             placeholder="Your Phone" />
@@ -147,7 +147,9 @@
                             <span class="text-danger">{{ $errors->first('phone') }}</span>
                         @endif
                     </div> --}}
-                    {!! Form::open()->post()->route('admin.login.post') !!}
+                    
+
+                    {!! Form::open()->post()->route('auth.user.login') !!}
                     {!! Form::text('email')->type('email')->attrs(['class' => 'form-control-lg'])->placeholder('Email') !!}
                     {!! Form::text('password')->type('password')->attrs(['class' => 'form-control-lg'])->placeholder('Password') !!}
                     <div class="form-group">
@@ -158,6 +160,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
                     {!! Form::close() !!}
+
                 </div>
                 {{-- <div class="card-body box-1">
                     <a href="{{ route('user.registration') }}">
