@@ -1,4 +1,4 @@
-@extends("web.welcome")
+@extends('web.welcome')
 @section('title', 'Trang chủ')
 @section('content')
     <div class="owl-carousel owl-carousel-slide">
@@ -9,7 +9,8 @@
                 {{-- </div> --}}
                 <div class="title-name-slide">
                     <h5 class="name-slide-category">{{ $sl->category->name }}<h5>
-                    <div><a class="title-slide" href="{{ route('web.news.show', $sl->id) }}">{{ $sl->title }}</a></div>
+                            <div><a class="title-slide" href="{{ route('web.news.show', $sl->id) }}">{{ $sl->title }}</a>
+                            </div>
                 </div>
             </div>
         @endforeach
@@ -26,7 +27,8 @@
                             <div class="img-post-hot">
                                 <img class="img" src="{{ $nh->image_url }}">
                             </div>
-                            <div style="margin-top: 10px"><a class="post-hot" href="{{ route('web.news.show', $nh->id) }}">{{ $nh->title }}</a>
+                            <div style="margin-top: 10px"><a class="post-hot"
+                                    href="{{ route('web.news.show', $nh->id) }}">{{ $nh->title }}</a>
                             </div>
                         </li>
                     @endforeach
@@ -63,10 +65,12 @@
                                             <div class="row">
                                                 <div class="col-5 tdleague">{{ $ndh->category->name }}</div>
                                                 <div class="col "></div>
-                                                <div class="col-6 tdleague" style="text-align: right">{{ $ndh->created_at }}</div>
+                                                <div class="col-6 tdleague" style="text-align: right">{{ $ndh->created_at }}
+                                                </div>
                                             </div>
                                             <div>
-                                                <a class="headernewsday" href="{{ route('web.news.show', $ndh->id) }}">{{ $ndh->title }}</a>
+                                                <a class="headernewsday"
+                                                    href="{{ route('web.news.show', $ndh->id) }}">{{ $ndh->title }}</a>
                                             </div>
                                             <div class="descrinewsday">{{ $ndh->description }}</div>
                                         </div>
@@ -99,13 +103,14 @@
                     <div class="col-md-10 offset-md-1">
                         <div class="owl-carousel  owl-carousel-match owl-theme">
                             @foreach ($namesch as $nsch)
-                            <div class="item item-match">
-                                <img class="img-matchleague"
-                                    src="https://cdn.ketnoibongda.vn/media-c/750-500-90/upload/images/lich-thi-dau-bong-da-ngay-104-2020-01-22.jpg" />
-                                <div class="nameleague">
-                                    <a class="anameleague" href="{{ route('web.news.schedule', $nsch->id) }}">{{ $nsch->name }}</a>
+                                <div class="item item-match">
+                                    <img class="img-matchleague"
+                                        src="https://cdn.ketnoibongda.vn/media-c/750-500-90/upload/images/lich-thi-dau-bong-da-ngay-104-2020-01-22.jpg" />
+                                    <div class="nameleague">
+                                        <a class="anameleague"
+                                            href="{{ route('web.news.schedule', $nsch->id) }}">{{ $nsch->name }}</a>
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -136,7 +141,8 @@
                                         <div class="item">
                                             <div class="row container">
                                                 <div class="col-10">
-                                                    <a class=" league-textbxh" href="{{ route('web.news.rank', $item->id)}}">{{ $item->name }}</a>
+                                                    <a class=" league-textbxh"
+                                                        href="{{ route('web.news.rank', $item->id) }}">{{ $item->name }}</a>
                                                 </div>
                                             </div>
                                             <table class="table table-bordered bxh-league-table">
@@ -151,9 +157,9 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($item->rankings as $rk)
-                                                   {{-- if($index == 5) vàng if($index > 5 && $index <18) ko màu --}}
-                                                        <tr class="bg-light" >
-                                                            <td >{{ $rk->rank }}</td>
+                                                        {{-- if($index == 5) vàng if($index > 5 && $index <18) ko màu --}}
+                                                        <tr class="bg-light">
+                                                            <td>{{ $rk->rank }}</td>
                                                             <td>{{ $rk->name }}</td>
                                                             <td>{{ $rk->total }}</td>
                                                             <td>{{ $rk->difference }}</td>
@@ -181,7 +187,8 @@
                                 <li class="list-group-category">
                                     <div class=" category-name-item">
                                         <span class="lnr lnr-chevron-right-circle"></span>
-                                       <a class="category-item" href="{{ route('web.news.category', $ct->id)}}">{{ $ct->name }}</a>
+                                        <a class="category-item"
+                                            href="{{ route('web.news.category', $ct->id) }}">{{ $ct->name }}</a>
                                     </div>
                                 </li>
                             @endforeach
@@ -189,7 +196,7 @@
                     </div>
                     <div class="row no-gutters">
                         <div class="row col-10 most">
-                            <h5 class="tdschedule col-12" >Lịch thi đấu</h5>
+                            <h5 class="tdschedule col-12">Lịch thi đấu</h5>
                         </div>
                         <ul class="list-group-hot col-12">
                             @foreach ($schedules as $sch)
@@ -199,20 +206,20 @@
                                             <a class="datehome">{{ $sch->date }}</a>
                                         </div>
                                         <div class="col-4">
-                                            <a class="timehome">{{  $sch->time}}</a>
+                                            <a class="timehome">{{ $sch->time }}</a>
                                         </div>
 
                                     </div>
                                     <div class="row" style="margin-top: 8px">
-                                        <img class="col-6 imgsch1" src="{{ $sch->flogo1 }}"/>
-                                        <img class="col-6 imgsch2" src="{{ $sch->flogo2 }}"/>
+                                        <img class="col-6 imgsch1" src="{{ $sch->flogo1 }}" />
+                                        <img class="col-6 imgsch2" src="{{ $sch->flogo2 }}" />
                                     </div>
                                     <div class="row box-name-schedule">
                                         <div class="col-6" style="text-align: center">
                                             <a class="team1home">{{ $sch->fname1 }}</a>
                                         </div>
                                         <div class="col-6" style="text-align: center">
-                                            <a class="team2home" >{{ $sch->fname2 }}</a>
+                                            <a class="team2home">{{ $sch->fname2 }}</a>
                                         </div>
                                     </div>
                                 </li>
