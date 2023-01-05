@@ -58,6 +58,14 @@ Route::get('/giai-dau/{id}', [CategoryController::class, 'categorydetail'])->nam
 Route::post('/register', [AuthController::class, 'register'])->name('user.registration');
 Route::get('/registration', [AuthController::class, 'registration'])->name('auth.register');
 
+Route::get('/reset', [AuthController::class, 'reset'])->name('web.reset.pass');
+Route::post('/reset', [AuthController::class, 'sendResetLinkEmail'])->name('auth.reset.pass');
+
+
+Route::get('/check-code', [AuthController::class, 'checkCode'])->name('auth.check.code');
+
+
+
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('auth.user.login');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminLoginRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\AdminUser;
@@ -15,8 +16,16 @@ use App\Services\Upload\UploadImageServiceInterface;
 use App\Services\User\UserServiceInterface;
 use App\Traits\ApiResponser;
 use App\Traits\UploadTrait;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\SendMail;
+use App\Models\PasswordReset;
+use App\Notifications\ResetPasswordRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -73,6 +82,19 @@ class AuthController
         $user = $this->userRepository->checkAuthUserAdmin();
         return view('auth.profile', compact('user'));
     }
+
+    public function reset()
+    {
+        // $user = $this->userRepository->checkAuthUserAdmin();
+        return view('auth.resetPass');
+    }
+
+    public function checkCode()
+    {
+        // $user = $this->userRepository->checkAuthUserAdmin();
+        return view('auth.checkCode');
+    }
+
 
     public function upload(Request $request)
     {
@@ -150,6 +172,77 @@ class AuthController
             return redirect()->back()->withErrors($e->getMessage());
         } //end try
     }
+
+    public function sendResetLinkEmail(ForgotPasswordRequest $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if (empty($user)) {
+            $message = trans('Không tìm thấy dữ liệu của bạn');
+
+            return  redirect()->back()->withError($message);
+        }
+
+        // $passwordReset = PasswordReset::updateOrCreate([
+        //     'email' => $user->email,
+        // ], [
+        //     'token' => Str::random(128),
+        // ]);
+
+        $strToken = Str::random(128);
+        $token = str_replace('/', '', Hash::make($strToken));
+        $array = [0,1,2,3,4,5,6,7,8,9];
+        $code = Arr::random($array).Arr::random($array).Arr::random($array).Arr::random($array);
+
+        // if ($passwordReset) {
+        //     $user->notify(new ResetPasswordRequest($passwordReset->token));
+        // }
+        $tokenSuccess = DB::table('password_resets')->insert([
+            'email' => request('email'),
+            'token' => $token,
+            'code' => $code,
+            'created_at' =>Carbon::now(),
+            'updated_at' =>Carbon::now()
+
+        ]);
+
+        if ($tokenSuccess) {
+            Mail::to($request->email)->send(new SendMail($code,$token));
+            return  redirect()->route('auth.check.code')->with('success', 'Gửi mã thành công. Hãy kiểm tra Gmail của mình');
+        } else {
+            $message = 'Yêu cầu của bạn đã xảy ra lỗi';
+            return redirect()->back()->withErrors($message);
+        }
+        // return redirect()->route('auth.login')->with('success', 'Gửi mã thành công. Hãy kiểm tra Gmail của mình');
+
+    }
+
+    public function resetCodePassword(ResetPasswordV2Request $request)
+    {
+        try {
+            $passwordReset = PasswordReset::where(['email' => $request->email])->orderBy('created_at','desc')->first();
+            if ($passwordReset) {
+                if($passwordReset->code != $request->code){
+                    $message = trans('messages.admin.forgot_password.old');
+                    return $this->errorResponse($message);
+                }
+                $afterTimenow = Carbon::now();
+                $afterTimenow->subMinutes(30);
+                if ($afterTimenow > $passwordReset->created_at) {
+                    $message = trans('messages.admin.forgot_password.expired_code');
+                    return $this->errorResponse($message);
+                }
+                $message = trans('messages.admin.forgot_password.correct');
+                return $this->sendMessage($message);
+            } else {
+                $message = trans('messages.admin.forgot_password.not_found');
+                return $this->errorResponse($message);
+            }
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
+
 
 
 
