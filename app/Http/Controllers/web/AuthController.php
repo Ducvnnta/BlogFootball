@@ -8,6 +8,8 @@ use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\Auth\CheckCodeResetRequest;
+use App\Http\Requests\Auth\ResetPassWordRequest;
 use App\Models\AdminUser;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
@@ -25,7 +27,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\SendMail;
 use App\Models\PasswordReset;
-use App\Notifications\ResetPasswordRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -59,8 +60,7 @@ class AuthController
 
     public function login()
     {
-        if(!session()->has('url.intended'))
-        {
+        if (!session()->has('url.intended')) {
             session(['url.intended' => url()->previous()]);
         }
         return view('auth.login');
@@ -85,14 +85,17 @@ class AuthController
 
     public function reset()
     {
-        // $user = $this->userRepository->checkAuthUserAdmin();
         return view('auth.resetPass');
     }
 
     public function checkCode()
     {
-        // $user = $this->userRepository->checkAuthUserAdmin();
         return view('auth.checkCode');
+    }
+
+    public function confirmPass()
+    {
+        return view('auth.confirmPass');
     }
 
 
@@ -132,21 +135,18 @@ class AuthController
         $remember = $request->get('remember');
 
         $admin = AdminUser::where('email', $request->email)->first();
-        if(is_null($admin))
-        {
+        if (is_null($admin)) {
             $user = User::where('email', $request->email)->first();
         }
 
-        if(Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false )
-        {
-          return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
+        if (Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false) {
+            return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
         }
 
         if (Auth::guard('admin')->attempt($data, $remember) && !is_null($admin->is_admin)) {
-          return redirect()->route('admin.dashboard');
-        }else if(Auth::guard('web')->attempt($data, $remember) && is_null($user->is_admin))
-        {
-          return redirect(session()->get('url.intended'));
+            return redirect()->route('admin.dashboard');
+        } else if (Auth::guard('web')->attempt($data, $remember) && is_null($user->is_admin)) {
+            return redirect(session()->get('url.intended'));
         }
     }
 
@@ -175,76 +175,83 @@ class AuthController
 
     public function sendResetLinkEmail(ForgotPasswordRequest $request)
     {
+        if ($request->email) {
+            session(['email' => $request->email]);
+        }
         $user = User::where('email', $request->email)->first();
         if (empty($user)) {
             $message = trans('Không tìm thấy dữ liệu của bạn');
 
             return  redirect()->back()->withError($message);
         }
-
-        // $passwordReset = PasswordReset::updateOrCreate([
-        //     'email' => $user->email,
-        // ], [
-        //     'token' => Str::random(128),
-        // ]);
-
         $strToken = Str::random(128);
         $token = str_replace('/', '', Hash::make($strToken));
-        $array = [0,1,2,3,4,5,6,7,8,9];
-        $code = Arr::random($array).Arr::random($array).Arr::random($array).Arr::random($array);
+        $array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $code = Arr::random($array) . Arr::random($array) . Arr::random($array) . Arr::random($array);
 
-        // if ($passwordReset) {
-        //     $user->notify(new ResetPasswordRequest($passwordReset->token));
-        // }
         $tokenSuccess = DB::table('password_resets')->insert([
             'email' => request('email'),
             'token' => $token,
             'code' => $code,
-            'created_at' =>Carbon::now(),
-            'updated_at' =>Carbon::now()
+            'created_at' => Carbon::now()
 
         ]);
 
         if ($tokenSuccess) {
-            Mail::to($request->email)->send(new SendMail($code,$token));
-            return  redirect()->route('auth.check.code')->with('success', 'Gửi mã thành công. Hãy kiểm tra Gmail của mình');
+            Mail::to($request->email)->send(new SendMail($code, $token));
+            return  redirect()->route('user.check.code')->with('success', 'Gửi mã thành công. Hãy kiểm tra Gmail của mình');
         } else {
             $message = 'Yêu cầu của bạn đã xảy ra lỗi';
-            return redirect()->back()->withErrors($message);
+            return redirect()->back()->with('error', $message);
         }
         // return redirect()->route('auth.login')->with('success', 'Gửi mã thành công. Hãy kiểm tra Gmail của mình');
 
     }
 
-    public function resetCodePassword(ResetPasswordV2Request $request)
+    public function resetCodePassword(CheckCodeResetRequest $request)
     {
-        try {
-            $passwordReset = PasswordReset::where(['email' => $request->email])->orderBy('created_at','desc')->first();
-            if ($passwordReset) {
-                if($passwordReset->code != $request->code){
-                    $message = trans('messages.admin.forgot_password.old');
-                    return $this->errorResponse($message);
-                }
-                $afterTimenow = Carbon::now();
-                $afterTimenow->subMinutes(30);
-                if ($afterTimenow > $passwordReset->created_at) {
-                    $message = trans('messages.admin.forgot_password.expired_code');
-                    return $this->errorResponse($message);
-                }
-                $message = trans('messages.admin.forgot_password.correct');
-                return $this->sendMessage($message);
-            } else {
-                $message = trans('messages.admin.forgot_password.not_found');
-                return $this->errorResponse($message);
+        dd(session()->get('email'));
+        $email = session()->get('email');
+
+        $passwordReset = PasswordReset::where('email', $email)->orderBy('id', 'DESC')->first();
+        if ($passwordReset) {
+            if ($passwordReset->code != $request->code) {
+                return redirect()->back()->with('error', 'Code không đúng hãy lấy code mới nhất !');
             }
-        } catch (\Exception $e) {
-            return $this->errorResponse($e->getMessage());
+            $afterTimenow = Carbon::now();
+            $afterTimenow->subMinutes(30);
+            if ($afterTimenow > $passwordReset->created_at) {
+                return redirect()->back()->with('error', 'Code đã hết hạn hãy gửi lại');
+            }
+            $message = trans('Code đúng hay đổi lại mật khẩu của bạn');
+            return  redirect()->route('user.confirm.pass')->with('success', $message);
+        } else {
+            return redirect()->back()->with('error', 'không tìm thấy code !');
         }
     }
 
-
-
-
+    public function resetEmailPassword(ResetPassWordRequest $request)
+    {
+        $email = session()->get('email');
+        $passwordReset = PasswordReset::where('email', $email)->orderBy('id', 'desc')->first();
+        if ($passwordReset) {
+            if ($passwordReset->email != $request->email) {
+                return redirect()->back()->with('error', 'Email không đúng xin hay kiểm tra lại!');
+            }
+            $afterTimenow = Carbon::now();
+            $afterTimenow->subMinutes(30);
+            if ($afterTimenow > $passwordReset->created_at) {
+                return redirect()->back()->with('error', 'Code đã hết hiệu lực xin hay yêu cầu lại!');
+            }
+            PasswordReset::where('email', $request->email)->delete();
+            User::where('email', $request->email)->update([
+                'password' => bcrypt($request['password'])
+            ]);
+            return  redirect()->route('auth.login')->with('success', 'Thay đổi mật khẩu thành công hãy đăng nhập lại');
+        } else {
+            return redirect()->back()->with('error', 'Không tìm thấy tài khoản hãy kiểm tra lại!');
+        }
+    }
 
     /**
      * @return \Illuminate\Http\RedirectResponse

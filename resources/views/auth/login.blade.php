@@ -18,7 +18,10 @@
                 </div>
                 <div class="card-body">
                     @if (Session::has('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                             {{ Session::get('success') }}
                             @php
                                 Session::forget('success');
@@ -27,7 +30,10 @@
                     @endif
 
                     @if (Session::has('error'))
-                        <div class="alert alert-error">
+                        <div class="alert alert-error" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                             {{ Session::get('error') }}
                             @php
                                 Session::forget('error');

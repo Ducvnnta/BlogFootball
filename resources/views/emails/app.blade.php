@@ -172,7 +172,7 @@
                                             {{-- <div class="brand">{{ env('APP_SHORT_NAME', 'LAP') }}</div> --}}
 
                                             <div class="tagline">
-                                                {{ 'FM-Style' }}
+                                                <a href="{{ url('/') }}"> {{ 'Football-News' }}</a>
                                             </div>
                                         </td>
                                     </tr>

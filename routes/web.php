@@ -40,7 +40,7 @@ Route::get('ranknew', function () {
 });
 
 Route::get('register', function () {
-    return view('admin.auth.register');
+    return view('auth.register');
 })->name('auth.register');
 
 Route::get('detail', function () {
@@ -62,8 +62,11 @@ Route::get('/reset', [AuthController::class, 'reset'])->name('web.reset.pass');
 Route::post('/reset', [AuthController::class, 'sendResetLinkEmail'])->name('auth.reset.pass');
 
 
-Route::get('/check-code', [AuthController::class, 'checkCode'])->name('auth.check.code');
+Route::get('/check-code', [AuthController::class, 'checkCode'])->name('user.check.code');
+Route::post('/check-code', [AuthController::class, 'resetCodePassword'])->name('auth.check.code');
 
+Route::get('/reset-pass', [AuthController::class, 'confirmPass'])->name('user.confirm.pass');
+Route::post('/reset-pass', [AuthController::class, 'resetEmailPassword'])->name('auth.confirm.pass');
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
