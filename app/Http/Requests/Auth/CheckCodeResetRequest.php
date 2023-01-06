@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests\Auth;
 
-
 use App\Http\Requests\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ForgotPasswordRequest extends FormRequest
+class CheckCodeResetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +25,17 @@ class ForgotPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
+            'code'=>'required|string'
         ];
     }
-
 
     public function messages()
     {
         $messages = [
-            'email.required' => 'Email không được để trống',
+            'code.required' => 'Code không được để trống',
         ];
         return $messages;
     }
+
 }
+

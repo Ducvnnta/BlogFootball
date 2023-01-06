@@ -16,33 +16,31 @@
             </div>
             <div class="card-body">
                 @if (Session::has('success'))
-                    <div class="alert alert-success">
-                        {{ Session::get('success') }}
-                        @php
-                            Session::forget('success');
-                        @endphp
-                    </div>
-                @endif
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ Session::get('success') }}
+                    @php
+                        Session::forget('success');
+                    @endphp
+                </div>
+            @endif
 
-                @if (Session::has('error'))
-                    <div class="alert alert-error">
-                        {{ Session::get('error') }}
-                        @php
-                            Session::forget('error');
-                        @endphp
-                    </div>
-                @endif
-                {{--
-                <div class="form-outline flex-fill mb-0">
-                    <input type="text" name="phone" class="form-control"
-                        placeholder="Your Phone" />
-                    @if ($errors->has('phone'))
-                        <span class="text-danger">{{ $errors->first('phone') }}</span>
-                    @endif
-                </div> --}}
+            @if (Session::has('error'))
+                <div class="alert alert-error" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ Session::get('error') }}
+                    @php
+                        Session::forget('error');
+                    @endphp
+                </div>
+            @endif
 
 
-                {!! Form::open()->post()->route('auth.reset.pass') !!}
+                {!! Form::open()->post()->route('auth.check.code') !!}
                 {!! Form::text('code')->type('code')->attrs(['class' => 'form-control-lg'])->placeholder('code') !!}
                 {{-- <div class="form-group">
                     <label class="custom-control custom-checkbox">
@@ -63,7 +61,7 @@
                 <a href="{{ route('web.reset.pass') }}">
                     <div class=" box-1">
                         <div class="btn btn-one">
-                            <span>Gửi mã</span>
+                            <span>Gửi mã lại</span>
                         </div>
                     </div>
                 </a>

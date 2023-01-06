@@ -9,10 +9,18 @@ class PasswordReset extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
+        'id',
         'email',
-        'code',
         'token',
-    ];
+        'code',
+        'created_at',
+
+      ];
 
 }

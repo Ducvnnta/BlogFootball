@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
-
-use App\Http\Requests\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ForgotPasswordRequest extends FormRequest
+class ResetPassWordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +25,8 @@ class ForgotPasswordRequest extends FormRequest
     {
         return [
             'email' => 'required|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
+            'password' => 'required|min:6|max:20|confirmed',
+            'password_confirmation' => 'required',
         ];
     }
 
@@ -35,6 +35,8 @@ class ForgotPasswordRequest extends FormRequest
     {
         $messages = [
             'email.required' => 'Email không được để trống',
+            'password.required' => 'Mật khẩu không được để trống',
+            'password_confirmation.required' => 'Xác nhận mật khẩu không được để trống',
         ];
         return $messages;
     }
