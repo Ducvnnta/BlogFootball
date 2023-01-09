@@ -57,7 +57,7 @@
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" name="remember"><span
                                 class="custom-control-label">Remember Password</span>
-                                <a href="{{ route('web.reset.pass') }}"> <span>Forgot Password?</span></a>
+                                <a href="{{ route('web.reset.pass') }}" style="float: right"> <span>Forgot Password?</span></a>
 
                         </label>
                     </div>

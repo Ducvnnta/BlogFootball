@@ -19,9 +19,12 @@
         <div class="form-group" style="margin-botttom: 12px">
             <label for="inp-image_url">Ảnh thu nhỏ</label>
             <input class="form-control-file input-file" type="file" name="image_url" id="inp-image_url">
+            @if (!is_null($news))
             <div class="preview">
                 <img src="{{ $news->image_url }}">
             </div>
+            @endif
+
             <input class="old-input" type="hidden" name="old_image_url">
         </div>
         <button type="button" class="btn btn-primary video-btn" data-toggle="modal"

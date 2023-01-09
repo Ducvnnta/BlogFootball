@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\EditorController;
+use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\web\AuthController as WebAuthController;
 
 /*
@@ -55,10 +57,20 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
 
   });
-//   Route::prefix('users')->group(function () {
-//     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
-//     Route::get('/', [NewsController::class, 'index'])->name('admin.news');
 
-// });
+    Route::get('/admin', [AdminUserController::class, 'listAdmin'])->name('get.list.admin');
+    Route::get('/user', [AdminUserController::class, 'listUser'])->name('get.list.user');
+
+    // Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+
+
+Route::prefix('ranks')->group(function () {
+    Route::get('/', [RankController::class, 'list'])->name('get.list.rank');
+
+    Route::get('/create', [RankController::class, 'create'])->name('admin.rank.create');
+
+    // Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+
+});
 
 });

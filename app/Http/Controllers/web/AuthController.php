@@ -138,14 +138,12 @@ class AuthController
         if (is_null($admin)) {
             $user = User::where('email', $request->email)->first();
         }
-
         if (Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false) {
             return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
         }
-
-        if (Auth::guard('admin')->attempt($data, $remember) && !is_null($admin->is_admin)) {
+        if (!is_null($admin)) {
             return redirect()->route('admin.dashboard');
-        } else if (Auth::guard('web')->attempt($data, $remember) && is_null($user->is_admin)) {
+        } else if(!is_null($user)) {
             return redirect(session()->get('url.intended'));
         }
     }
@@ -175,9 +173,6 @@ class AuthController
 
     public function sendResetLinkEmail(ForgotPasswordRequest $request)
     {
-        if ($request->email) {
-            session(['email' => $request->email]);
-        }
         $user = User::where('email', $request->email)->first();
         if (empty($user)) {
             $message = trans('Không tìm thấy dữ liệu của bạn');
@@ -188,7 +183,9 @@ class AuthController
         $token = str_replace('/', '', Hash::make($strToken));
         $array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         $code = Arr::random($array) . Arr::random($array) . Arr::random($array) . Arr::random($array);
-
+        if ($token) {
+            session(['token' => $token]);
+        }
         $tokenSuccess = DB::table('password_resets')->insert([
             'email' => request('email'),
             'token' => $token,
@@ -210,10 +207,9 @@ class AuthController
 
     public function resetCodePassword(CheckCodeResetRequest $request)
     {
-        dd(session()->get('email'));
-        $email = session()->get('email');
-
-        $passwordReset = PasswordReset::where('email', $email)->orderBy('id', 'DESC')->first();
+        $token = session()->get('token');
+        dd($token);
+        $passwordReset = PasswordReset::where('token', $token)->orderBy('id', 'DESC')->first();
         if ($passwordReset) {
             if ($passwordReset->code != $request->code) {
                 return redirect()->back()->with('error', 'Code không đúng hãy lấy code mới nhất !');

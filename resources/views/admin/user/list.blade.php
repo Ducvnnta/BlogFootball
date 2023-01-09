@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Quản lý danh mục</h2>
+                    <h2 class="pageheader-title">Tin tức</h2>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.news') }}" class="breadcrumb-link">Danh
-                                        sách danh mục</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,9 +30,9 @@
             <!-- basic table -->
             <!-- ============================================================== -->
             <div class="col-12">
-                <div class="card"  style="margin-bottom: 0">
+                <div class="card">
                     <div class="card-header card-header-with-button" style="margin-left: 1px">
-                        <h5 class="col-md-2 mb-0 card-header-title">Danh sách Danh mục</h5>
+                        <h5 class="col-md-2 mb-0 card-header-title">Danh sách Quản trị viên</h5>
                         <div class="row col-md-6">
                             <label>Tìm kiếm
                                 <input id="searchBox" type="text" style="padding-left: 2px" autocomplete="off"> </label>
@@ -61,47 +61,33 @@
                         <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Xuất</a> --}}
 
                     </div>
-
-                    {{-- @if (Session::has('success'))
-                        <div class="alert alert-success">
-                            {{ Session::get('success') }}
-                            @php
-                                Session::forget('success');
-                            @endphp
-                        </div>
-                    @endif --}}
                     <div style="background-color: #fff">
-
-                        <div class="ctable-responsive">
+                        <div class="table-responsive">
                             <table class="table"  id="myTable">
-                                <thead>
+                                <thead >
                                     <tr class="border-0">
                                         <th class="border-0 no-wrap">#</th>
                                         <th class="border-0 no-wrap">Hình ảnh</th>
-                                        <th class="border-0 no-wrap">Danh mục</th>
-                                        <th class="border-0 no-wrap">Thể loại</th>
-                                        <th class="border-0 no-wrap">Nguồn</th>
+                                        <th class="border-0 no-wrap">Họ tên</th>
+                                        <th class="border-0 no-wrap">Email</th>
+                                        <th class="border-0 no-wrap">Phone</th>
                                         <th class="border-0 no-wrap">Ngày tạo</th>
-                                        <th class="border-0 no-wrap">Ngày cập nhật</th>
                                         <th class="border-0 no-wrap">Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $key => $item)
+                                    @foreach ($users as $key => $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>
                                                 <div class="m-r-10">
-                                                    <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
-                                                        class="rounded" width="45">
+                                                    <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="rounded" width="45">
                                                 </div>
                                             </td>
                                             <td>{{ $item->name }}</td>
-                                            <td class="no-wrap">{{ $item->slug }}</td>
-                                            <td class="no-wrap"><span class="badge-dot badge-brand mr-1"></span>
-                                                {{ $item->source }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->phone }}</td>
                                             <td class="no-wrap">{{ $item->created_at }}</td>
-                                            <td class="no-wrap">{{ $item->updated_at }}</td>
                                             <td>
                                                 <div class="btn-groups-category mt-0">
                                                     {{-- <a class="btn btn-detail btn-xs " href="{{ route('admin.news.detail', $item->id) }}"> Xem</a> --}}
@@ -116,20 +102,18 @@
                                                     </a>
                                                 </div>
                                             </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-
-
-                        </tr>
-                        @endforeach
-                        </tbody>
-                        </table>
+                    </div>
+                    <div class="card-footer navigation">
+                        {{ $users->onEachSide(2)->links() }}
                     </div>
                 </div>
-                <div class="card-footer navigation">
-                    {{ $categories->onEachSide(2)->links() }}
-                </div>
             </div>
+            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
     </div>
 @endsection

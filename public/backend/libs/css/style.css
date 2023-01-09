@@ -3262,13 +3262,13 @@ btn-link
     font-size: 14px;
 }
 
-.card-body {}
+
 
 .card-text {}
 
 .card-footer {
     border-top: 1px solid #e6e6f2;
-    background: #f6f6ff;
+    background: #fff;
 }
 
 .card-link {}

@@ -14,7 +14,8 @@
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.news') }}" class="breadcrumb-link">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.news') }}"
+                                        class="breadcrumb-link">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
                             </ol>
                         </nav>
@@ -22,7 +23,6 @@
                 </div>
             </div>
         </div>
-
         @include('admin.includes.messages');
         <!-- ============================================================== -->
         <!-- end pageheader  -->
@@ -32,82 +32,100 @@
             <!-- basic table -->
             <!-- ============================================================== -->
             <div class="col-12">
-                <div class="card">
-                    <div class="container">
-                    <div class="card-header card-header-with-button">
-                        <h5 class="mb-0 card-header-title">Tất cả tin tức</h5>
-                        <div class="mb-2" style="padding-left: 10px" >
-                            {{-- <form class="search-form" autocomplete="off" role="search" > --}}
-                                <label for="myInput">Tìm kiếm
-                                    <input id="myInput" type="text" > </label>
+                <div class="card" style="margin-bottom: 0">
+                    <div class="row card-header card-header-with-button" style="margin-left: 1px">
+                        <h5 class="col-md-2 mb-0 card-header-title">Danh sách tin tức</h5>
+                        <div class="row col-md-6">
+                            <label>Tìm kiếm
+                                <input id="searchBox" type="text" style="padding-left: 2px" autocomplete="off"> </label>
+                                {{-- <div class="dataTables_length bs-select" id="dtBasicExample_length">
+                                    <label>Show
+                                        <select name="dtBasicExample_length" aria-controls="dtBasicExample" class="custom-select custom-select-sm form-control form-control-sm">
+                                            <option value="Tất cả">Tất cả</option>
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="25">25</option>
+                                            <option value="30">30</option>
+
+                                        </select>
+                                    </label>
+
+                                    </div> --}}
 
                         </div>
-                        <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success" style="margin-left: 65%">Thêm mới</a>
 
+                        <div class="col-md-4">
+                            <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success"
+                                style="float: right">Thêm mới</a>
+                        </div>
                         {{-- <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Import</a>
                         <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Xuất</a> --}}
-
-                    </div>
-
-                </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table" id="myTable">
-                                <thead class="bg-light">
-                                    <tr class="border-0">
-                                        <th class="border-0 no-wrap">#</th>
-                                        <th class="border-0 no-wrap">Hình ảnh</th>
-                                        <th class="border-0 no-wrap">Tiêu đề</th>
-                                        <th class="border-0 no-wrap">Danh mục</th>
-                                        <th class="border-0 no-wrap">Link gốc</th>
-                                        <th class="border-0 no-wrap">Nguồn</th>
-                                        <th class="border-0 no-wrap">Ngày tạo</th>
-                                        <th class="border-0 no-wrap">Ngày cập nhật</th>
-                                        <th class="border-0 no-wrap">Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($news as $key => $item)
-                                        <tr>
-                                            <td>{{ $item->id }}</td>
-                                            <td>
-                                                <div class="m-r-10">
-                                                    <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
-                                                        class="rounded" width="45">
-                                                </div>
-                                            </td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ optional($item->category)->name }}</td>
-                                            <td>
-                        </div>
-                        </td>
-                        <td class="no-wrap"><span class="badge-dot badge-brand mr-1"></span> {{ $item->source }}</td>
-                        <td class="no-wrap">{{ $item->created_at }}</td>
-                        <td class="no-wrap">{{ $item->updated_at }}</td>
-                        <td>
-                            <div class="btn-groups mt-0">
-                                <a class="btn btn-detail btn-xs " href="{{ route('admin.news.detail', $item->id) }}"> Xem</a>
-
-                                <a class="btn btn-info btn-xs" href="{{ route('admin.news.edit', $item->id) }}">
-                                    <i class="fas fa-info-circle"></i>
-                                </a>
-                                <a class="btn btn-danger btn-xs delete-confirm"
-                                    href="{{ route('admin.news.delete', $item->id) }}">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </div>
-                        </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                        </table>
                     </div>
                 </div>
-                <div class="card-footer navigation">
-                    {{ $news->onEachSide(2)->links() }}
+                <div style="background-color: #fff">
+                    <div class="table-responsive">
+                        <table class="table" id="myTable">
+                            <thead>
+                                <tr class="border-0">
+                                    <th class="border-0 no-wrap">#</th>
+                                    <th class="border-0 no-wrap">Hình ảnh</th>
+                                    <th class="border-0 no-wrap">Tiêu đề</th>
+                                    <th class="border-0 no-wrap">Danh mục</th>
+                                    <th class="border-0 no-wrap">Link gốc</th>
+                                    <th class="border-0 no-wrap">Nguồn</th>
+                                    <th class="border-0 no-wrap">Ngày tạo</th>
+                                    <th class="border-0 no-wrap">Ngày cập nhật</th>
+                                    <th class="border-0 no-wrap">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($news as $key => $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>
+                                            <div class="m-r-10">
+                                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="rounded"
+                                                    width="45">
+                                            </div>
+                                        </td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ optional($item->category)->name }}</td>
+                                        <td>{{ $item->link }}</td>
+
+                                        <td class="no-wrap"><span class="badge-dot badge-brand mr-1"></span>
+                                            {{ $item->source }}</td>
+                                        <td class="no-wrap">{{ $item->created_at }}</td>
+                                        <td class="no-wrap">{{ $item->updated_at }}</td>
+                                        <td>
+                                            <div class="btn-groups mt-0">
+                                                <a class="btn btn-detail btn-xs "
+                                                    href="{{ route('admin.news.detail', $item->id) }}"> Xem</a>
+
+                                                <a class="btn btn-info btn-xs"
+                                                    href="{{ route('admin.news.edit', $item->id) }}">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                                <a class="btn btn-danger btn-xs delete-confirm"
+                                                    href="{{ route('admin.news.delete', $item->id) }}">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                    </div>
+
+                    </tr>
+                    @endforeach
+                    </tbody>
+                    </table>
                 </div>
             </div>
+            <div class="card-footer navigation">
+                {{ $news->onEachSide(1)->links() }}
+            </div>
         </div>
-        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
     </div>
 @endsection
