@@ -33,16 +33,26 @@
             <!-- ============================================================== -->
             <div class="col-12">
                 <div class="card">
+                    <div class="container">
                     <div class="card-header card-header-with-button">
-                        <h5 class="mb-0 card-header-title">Quản lý tin tức</h5>
-                        <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Thêm mới</a>
+                        <h5 class="mb-0 card-header-title">Tất cả tin tức</h5>
+                        <div class="mb-2" style="padding-left: 10px" >
+                            {{-- <form class="search-form" autocomplete="off" role="search" > --}}
+                                <label for="myInput">Tìm kiếm
+                                    <input id="myInput" type="text" > </label>
+
+                        </div>
+                        <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success" style="margin-left: 65%">Thêm mới</a>
+
                         {{-- <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Import</a>
                         <a href="{{ route('admin.news.create') }}" class="btn btn-sm btn-success">Xuất</a> --}}
 
                     </div>
+
+                </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="myTable">
                                 <thead class="bg-light">
                                     <tr class="border-0">
                                         <th class="border-0 no-wrap">#</th>

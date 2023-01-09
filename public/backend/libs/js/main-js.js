@@ -188,7 +188,7 @@ imgInp.onchange = (evt) => {
     // ==============================================================
     // Popup Preview Video
     // ==============================================================
-    
+
 // $(document).ready(function () {
     // Gets the video src from the data-src on each button
 
@@ -215,3 +215,52 @@ imgInp.onchange = (evt) => {
 
     // document ready
 // });
+
+    // ==============================================================
+    // Search List News Admin
+    // ==============================================================
+
+    // $(document).ready(function () {
+    //     $('#dtListNews').DataTable();
+    //     $('.dataTables_length').addClass('bs-select');
+    //   });
+
+      function filterTable(event) {
+        let filter = event.target.value.trim().toLowerCase();
+        let rows = document.querySelector('#myTable tbody').rows;
+        for (let i = 0; i < rows.length; i++) {
+          let row = rows[i], show = false;
+          if (filter.length > 0) {
+            for (let j = 0; j < row.children.length; j++) {
+              let col = row.children[j], text = col.textContent.toLowerCase();
+              if (text.indexOf(filter) > -1) {
+                show = true;
+                continue;
+              }
+            }
+          } else {
+            show = true;
+          }
+          // Avoid using 'row.styledisplay' - https://stackoverflow.com/a/28028656/1762224
+          // Avoid using 'row.visibility'   - rows do not collapse
+          toggleClass(row, 'hidden-row', !show);
+        }
+      }
+
+      function toggleClass(el, className, state) {
+        if (el.classList) el.classList.toggle(className, state);
+        else {
+          var classes = el.className.split(' ');
+          var existingIndex = classes.indexOf(className);
+          if (state === undefined) {
+            if (existingIndex > -1) classes.splice(existingIndex, 1)
+            else classes.push(existingIndex);
+          } else {
+            if (!state) classes.splice(existingIndex, 1)
+            else classes.push(existingIndex);
+          }
+          el.className = classes.join(' ');
+        }
+      }
+
+      document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
