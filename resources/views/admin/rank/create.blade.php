@@ -8,14 +8,12 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Tin tức</h2>
-                    <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
-                        facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                    <h2 class="pageheader-title">Quản lý giải đấu</h2>
+
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}" class="breadcrumb-link">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.news')}}" class="breadcrumb-link">Tin tức</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}" class="breadcrumb-link">Quản lý giải đấu</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tạo mới</li>
                             </ol>
                         </nav>
@@ -23,7 +21,6 @@
                 </div>
             </div>
         </div>
-
         <!-- ============================================================== -->
         <!-- end pageheader  -->
         <!-- ============================================================== -->
@@ -34,8 +31,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                      {!!Form::open()->post()->multipart()->route('admin.news.store')!!}
-                        @include('admin.news.form')
+                      {!!Form::open()->post()->multipart()->route('admin.category.store')!!}
+                        @include('admin.rank.form')
                       {!!Form::close()!!}
                     </div>
                 </div>

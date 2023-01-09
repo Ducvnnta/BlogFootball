@@ -8,15 +8,20 @@ use App\Models\Category;
 use App\Models\News;
 use Str;
 use  App\Traits\UploadTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class NewsController extends BaseController
 {
     use UploadTrait;
 
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::with('category')->latest()->paginate(10);
+        $perPage       = $request->per_page;
+        $page          = $request->page;
+        $perPage = $perPage ? $perPage : 10;
+        $news = News::with('category')->orderBy('id', 'DESC');
+        $news = $news->paginate($perPage);
         return view('admin.news.index', compact('news'));
     }
 
@@ -36,7 +41,8 @@ class NewsController extends BaseController
     public function create()
     {
         $categories = Category::all()->pluck('name', 'id');
-        return view('admin.news.create', compact('categories'));
+        $news = null;
+        return view('admin.news.create', compact('categories', 'news'));
     }
 
     public function detail($id)

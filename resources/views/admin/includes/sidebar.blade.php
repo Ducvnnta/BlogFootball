@@ -36,13 +36,13 @@
                   </li>
 
                   <li class="nav-item ">
-                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <a class    ="nav-link" href="{{ route('get.list.rank') }}">
                       <i class="fab fa-fw fa-wpforms"></i>Bảng xếp hạng
                       <span class="badge badge-success">6</span>
                     </a>
                   </li>
                   <li class="nav-item ">
-                    <a class="nav-link" href="{{route('admin.news')}}">
+                    <a class="nav-link" href="{{ route('admin.news') }}">
                       <i class="fab fa-fw fa-wpforms"></i>Lịch thi đấu
                       <span class="badge badge-success">6</span>
                     </a>
@@ -52,14 +52,14 @@
                     Quản lý user
                 </li>
                 <li class="nav-item ">
-                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <a class="nav-link" href="{{ route('get.list.admin') }}">
                       <i class="fab fa-fw fa-wpforms"></i>Quản trị viên
                       <span class="badge badge-success">6</span>
                     </a>
                   </li>
 
                   <li class="nav-item ">
-                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <a class="nav-link" href="{{ route('get.list.user') }}">
                       <i class="fab fa-fw fa-wpforms"></i>Thành viên
                       <span class="badge badge-success">6</span>
                     </a>
@@ -71,28 +71,28 @@
                 </li>
 
                 <li class="nav-item ">
-                  <a class    ="nav-link" href="{{route('admin.news')}}">
+                  <a class="nav-link" href="{{route('admin.news')}}">
                     <i class="fab fa-fw fa-wpforms"></i>Setting
                     <span class="badge badge-success">6</span>
                   </a>
                 </li>
 
                 <li class="nav-item ">
-                  <a class    ="nav-link" href="{{route('admin.news')}}">
+                  <a class="nav-link" href="{{route('admin.news')}}">
                     <i class="fab fa-fw fa-wpforms"></i>Phân quyền
                     <span class="badge badge-success">6</span>
                   </a>
                 </li>
 
                 <li class="nav-item ">
-                  <a class    ="nav-link" href="{{route('admin.news')}}">
+                  <a class="nav-link" href="{{route('admin.news')}}">
                     <i class="fab fa-fw fa-wpforms"></i>Chính sách khách hàng
                     <span class="badge badge-success">6</span>
                   </a>
                 </li>
 
                 <li class="nav-item ">
-                    <a class    ="nav-link" href="{{route('admin.news')}}">
+                    <a class="nav-link" href="{{route('admin.news')}}">
                       <i class="fab fa-fw fa-wpforms"></i>Quảng cáo
                       <span class="badge badge-success">6</span>
                     </a>
