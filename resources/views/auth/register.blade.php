@@ -26,7 +26,7 @@
             <div class="container h-100">
 
                 <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-lg-12 col-xl-11">
+                    <div class="col-lg-12 col-xl-11" style="padding-top: 46px">
                         <div class="card text-black" style="border-radius: 55px;">
                             <div class="card-body p-md-5">
                                 <div class="row justify-content-center">

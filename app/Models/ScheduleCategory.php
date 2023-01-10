@@ -18,7 +18,8 @@ class ScheduleCategory extends Model
       'slug',
       'name'
     ];
-
+    public $timestamps = TRUE;
+    
     public function schedules(){
       return $this->hasMany(Schedule::class, 'schedule_category_id');
     }

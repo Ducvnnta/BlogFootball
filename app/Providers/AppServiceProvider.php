@@ -34,6 +34,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Category\CategoryServiceInterface::class,
             \App\Services\Category\CategoryService::class,
         );
+
+        $this->app->bind(
+            \App\Services\RankCategories\RankCategoriesServiceInterface::class,
+            \App\Services\RankCategories\RankCategoriesService::class,
+        );
     }
 
     public function registerRepository() //admin
@@ -51,6 +56,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Repositories\Category\CategoryRepositoryInterface::class,
             \App\Repositories\Category\CategoryReponsitory::class,
+        );
+
+        $this->app->bind(
+            \App\Repositories\RankCategories\RankCategoriesRepositoryInterface::class,
+            \App\Repositories\RankCategories\RankCategoriesReponsitory::class,
         );
 
     }

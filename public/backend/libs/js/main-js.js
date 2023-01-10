@@ -186,26 +186,25 @@ $(function () {
 // $(document).ready(function () {
     // Gets the video src from the data-src on each button
 
-    var $videoSrc;
-    $(".video-btn").click(function () {
-        $videoSrc = $(this).data("src");
-    });
-    console.log($videoSrc);
+    // var $videoSrc;
+    // $(".video-btn").click(function () {
+    //     $videoSrc = $(this).data("src");
+    // });
 
-    // when the modal is opened autoplay it
-    $("#myModal").on("shown.bs.modal", function (e) {
-        // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-        $("#video").attr(
-            "src",
-            $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0"
-        );
-    });
+    // // when the modal is opened autoplay it
+    // $("#myModal").on("shown.bs.modal", function (e) {
+    //     // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+    //     $("#video").attr(
+    //         "src",
+    //         $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0"
+    //     );
+    // });
 
-    // stop playing the youtube video when I close the modal
-    $("#myModal").on("hide.bs.modal", function (e) {
-        // a poor man's stop video
-        $("#video").attr("src", $videoSrc);
-    });
+    // // stop playing the youtube video when I close the modal
+    // $("#myModal").on("hide.bs.modal", function (e) {
+    //     // a poor man's stop video
+    //     $("#video").attr("src", $videoSrc);
+    // });
 
     // document ready
 // });
@@ -213,8 +212,49 @@ $(function () {
 
 
     // ==============================================================
-    // Upload Image
+    // Upload Image Rank Categories
     // ==============================================================
+
+    $(document).ready(function() {
+        if (window.File && window.FileList && window.FileReader) {
+          $("#image").on("change", function(e) {
+            var files = e.target.files,
+              filesLength = files.length;
+
+            for (var i = 0; i < filesLength; i++) {
+              var f = files[i]
+              var fileReader = new FileReader();
+              fileReader.onload = (function(e) {
+                var file = e.target;
+                // error_log('Some message here.');
+
+                // if(document.getElementById("old_image_rank") && document.getElementById("old_image_rank").value)
+                // {
+
+
+                //     $("<div class=\"pip\">" +
+                //     "<img class=\"imageThumb\" + id=\"old_image_rank\" + src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                //     "<br/><span class=\"remove\">x</span>" +
+                //     "</div>").insertAfter("#image");
+                // }else
+                // {
+                    $("<div class=\"pip\">" +
+                    "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                    "<br/><span class=\"remove\">x</span>" +
+                    "</div>").insertAfter("#image");
+                    $(".remove").click(function(){
+                        $(this).parent(".pip").remove();
+                        $("#image").val('');
+                      });
+                // }
+
+              });
+              fileReader.readAsDataURL(f);
+            }
+          });
+        }
+      });
+
 
     // imgInp.onchange = (evt) => {
     //     const [file] = imgInp.files;
@@ -222,41 +262,7 @@ $(function () {
     //         blah.src = URL.createObjectURL(file);
     //     }
     // };
-    function readURL(input) {
 
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#imagepreview1').prop('src', e.target.result).show();
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $("#input1").change(function () {
-        readURL(this);
-        $('#imagepreview1').show();
-    });
-
-    $("#input1").click(function () {
-
-        $('#imagepreview1').attr('src','');
-    });
-
-
-    $('#imagepreview1').click(function(){
-
-        $('#input1').replaceWith($('#input1').clone(true));
-        $('#imagepreview1').hide();
-
-    });
-    $('#cancel').click(function(e)
-    {
-        $('#input1').val("");
-        $('#imagepreview1').attr("","");
-    })
 
     // ==============================================================
     // Preview Upload Images

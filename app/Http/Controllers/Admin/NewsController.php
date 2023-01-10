@@ -77,8 +77,7 @@ class NewsController extends BaseController
 
     public function update(UpdateNewsRequest $request, $id)
     {
-        try {
-            DB::beginTransaction();
+
             $news = News::findOrFail($id);
             $data = $request->getData();
             $data['slug'] = Str::slug($data['title']);
@@ -89,13 +88,8 @@ class NewsController extends BaseController
               $data['image_url'] = $request->get('old_image_url');
             }
             $news->update($data);
-
             DB::commit();
             return redirect()->route('admin.news')->withFlashSuccess('Cập nhật tin tức thành công');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors($e->getMessage());
-        } //end try
     }
 
     public function destroy($id){
