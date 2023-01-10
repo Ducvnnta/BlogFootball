@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="app.css" type="text/css">
@@ -154,6 +155,14 @@
                 line-height: 18px;
             }
         }
+        form i {
+            float: right;
+            margin-left: 196px;
+            margin-top: 5px;
+            position: absolute;
+            z-index: 2;
+}
+
     </style>
 </head>
 
@@ -224,6 +233,22 @@
                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                             @endif
                         </div>
+                    </div>
+
+                        <div class="row py-2">
+
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="phone">Password</label>
+                                <div class="row" style="margin-left: 2px">
+
+                                    <input type="password" name="password" class="bg-light form-control" id="password" style="padding-right: 23px"
+                                    placeholder="password"  minlength="8" required>
+                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
+                                </div>
+                            </div>
                         {{-- <input type="password" name="confirm_password" class="form-control"
                 placeholder="Confirm your password" /> --}}
                         {{-- @if ($errors->has('confirm_password'))
@@ -274,6 +299,27 @@
         </form>
     </div>
 
+    <script>
+        imgInp.onchange = (evt) => {
+            const [file] = imgInp.files;
+            if (file) {
+                blah.src = URL.createObjectURL(file);
+            }
+        };
+
+
+    </script>
+    <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+    // toggle the eye / eye slash icon
+    this.classList.toggle('bi-eye');
+});
+    </script>
 
     <script src="backend/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstap bundle js -->

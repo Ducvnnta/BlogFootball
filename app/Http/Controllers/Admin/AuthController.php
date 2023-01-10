@@ -40,6 +40,7 @@ class AuthController extends Controller
     }
 
     public function login(){
+
       return view('auth.login');
     }
 
@@ -64,13 +65,12 @@ class AuthController extends Controller
     }
 
     public function postLogin(AdminLoginRequest $request){
+
       $data = $request->getData();
       $remember = $request->get('remember');
-    //   if($request->get('back'))
-    //   return redirect()->$request->get('back');
-
-      dd(321312);
-      if(Auth::attempt($data) === false)
+      if($request->get('back'))
+      return redirect()->$request->get('back');
+      if(Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false )
       {
         return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
       }

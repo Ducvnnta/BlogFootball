@@ -51,7 +51,8 @@
 
                     {!! Form::open()->post()->route('auth.user.login') !!}
                     {!! Form::text('email')->type('email')->attrs(['class' => 'form-control-lg'])->placeholder('Email') !!}
-                    {!! Form::text('password')->type('password')->attrs(['class' => 'form-control-lg'])->placeholder('Password') !!}
+                    {!! Form::text('password')->type('password')->attrs(['class' => 'form-control-lg', 'id'=> 'passLogin'])->placeholder('Password') !!}
+                    <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                     <div class="form-group">
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" name="remember"><span

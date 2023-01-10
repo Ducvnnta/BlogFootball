@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\SendMail;
+use App\Models\News;
 use App\Models\PasswordReset;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -80,7 +81,13 @@ class AuthController
     public function getMe()
     {
         $user = $this->userRepository->checkAuthUserAdmin();
-        return view('auth.profile', compact('user'));
+        $newsLasts = News::with('category')->orderBy('id', 'ASC')->limit(2)->get();
+        $newAlls = News::all();
+        $admins = AdminUser::all();
+        $users = User::all();
+        $newsReads = News::with('category')->orderBy('reads', 'DESC')->limit(2)->get();
+        $totalNewsReads = News::all();
+        return view('auth.profile', compact('user', 'newsLasts', 'newsReads', 'newAlls', 'totalNewsReads', 'admins', 'users'));
     }
 
     public function reset()
@@ -133,10 +140,23 @@ class AuthController
     {
         $data = $request->getData();
         $remember = $request->get('remember');
-        if (Auth::attempt($data) === false ) {
+        $admin = AdminUser::where('email', $request->email)->first();
+        if (is_null($admin)) {
+            $user = User::where('email', $request->email)->first();
+        }
+        if (Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false) {
             return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
         }
-        return redirect(session()->get('url.intended'));
+        if (!is_null($admin)) {
+            return redirect()->route('admin.dashboard');
+        } else if(!is_null($user)) {
+            $url = 'http://localhost:8001/admin';
+            if(session()->get('url.intended') === $url)
+            {
+                return redirect()->route('web.home');
+            }
+            return redirect(session()->get('url.intended'));
+        }
     }
 
 
@@ -155,8 +175,13 @@ class AuthController
             }
 
             $user->update($data);
-
-            return view('admin.auth.profile', compact('user'));
+            $newsLasts = News::with('category')->orderBy('id', 'ASC')->limit(2)->get();
+            $newAlls = News::all();
+            $admins = AdminUser::all();
+            $users = User::all();
+            $newsReads = News::with('category')->orderBy('reads', 'DESC')->limit(2)->get();
+            $totalNewsReads = News::all();
+            return view('auth.profile', compact('user', 'newsLasts', 'newsReads', 'newAlls', 'totalNewsReads', 'admins', 'users'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         } //end try
