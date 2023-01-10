@@ -25,6 +25,8 @@ Route::get('/login', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('admin.login.post');
 
 Route::middleware('auth:admin')->group(function () {
+
+
   Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
   Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
   Route::get('/edit-profile', [AuthController::class, 'edit'])->name('admin.edit.profile');
@@ -68,8 +70,12 @@ Route::prefix('ranks')->group(function () {
     Route::get('/', [RankController::class, 'list'])->name('get.list.rank');
 
     Route::get('/create', [RankController::class, 'create'])->name('admin.rank.create');
+    Route::post('/create', [RankController::class, 'store'])->name('admin.rank.store');
 
-    // Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+    Route::get('/edit/{id}', [RankController::class, 'edit'])->name('admin.rank.edit');
+    Route::post('/update/{id}', [RankController::class, 'update'])->name('admin.rank.update');
+
+    Route::get('/delete/{id}', [RankController::class, 'delete'])->name('admin.rank.delete');
 
 });
 

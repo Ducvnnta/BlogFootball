@@ -133,19 +133,10 @@ class AuthController
     {
         $data = $request->getData();
         $remember = $request->get('remember');
-
-        $admin = AdminUser::where('email', $request->email)->first();
-        if (is_null($admin)) {
-            $user = User::where('email', $request->email)->first();
-        }
-        if (Auth::guard('admin')->attempt($data) === false && Auth::guard('web')->attempt($data) === false) {
+        if (Auth::attempt($data) === false ) {
             return redirect()->back()->with('error', 'Email hoặc Mật khẩu không đúng');
         }
-        if (!is_null($admin)) {
-            return redirect()->route('admin.dashboard');
-        } else if(!is_null($user)) {
-            return redirect(session()->get('url.intended'));
-        }
+        return redirect(session()->get('url.intended'));
     }
 
 

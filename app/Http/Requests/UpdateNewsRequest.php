@@ -25,8 +25,12 @@ class UpdateNewsRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'image_url' => 'required_without:old_image_url|image|max:10000',
+            'image_url' => 'required|image|max:10000',
             'category_id' => 'required',
+            'detail' => 'required',
+            'link' => 'required',
+            'source' => 'required',
+
         ];
     }
 
@@ -34,4 +38,28 @@ class UpdateNewsRequest extends FormRequest
     {
         return $this->only(['title', 'description', 'detail', 'link', 'source', 'category_id']);
     }
+
+        /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Tên giải đấu không được để trống',
+            'title.max' => 'Tên giải đấu nhiều nhất có ::attribute',
+            'category_id.required' => 'Logo không được để trống',
+            'image.image' => 'Logo không đúng định dạng',
+            'category_id.required' => 'Logo không được để trống',
+            'detail' => 'required',
+            'link.required' => 'Logo không được để trống',
+            'image_url.required' => 'Logo không được để trống',
+            'source.required' => 'Logo không được để trống',
+
+        ];
+
+
+    }
+
 }

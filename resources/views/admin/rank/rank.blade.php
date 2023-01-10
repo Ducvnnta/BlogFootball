@@ -80,7 +80,7 @@
                                             <td>{{ $item->id }}</td>
                                             <td>
                                                 <div class="m-r-10">
-                                                    <img src="{{ asset($item->source) }}" alt="{{ $item->title }}" class="rounded" width="45">
+                                                    <img src="{{ $item->image }}" alt="{{ $item->title }}" class="rounded" width="100">
                                                 </div>
                                             </td>
                                             <td>{{ $item->name }}</td>
@@ -90,7 +90,7 @@
                                                     {{-- <a class="btn btn-detail btn-xs " href="{{ route('admin.news.detail', $item->id) }}"> Xem</a> --}}
 
                                                     <a class="btn btn-info btn-xs"
-                                                        href="{{ route('admin.category.edit', $item->id) }}">
+                                                        href="{{ route('admin.rank.edit', $item->id) }}">
                                                         <i class="fas fa-info-circle"></i>
                                                     </a>
                                                     <a class="btn btn-danger-category btn-xs delete-confirm"

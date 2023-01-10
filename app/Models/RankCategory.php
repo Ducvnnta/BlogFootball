@@ -15,9 +15,11 @@ class RankCategory extends Model
      * @var array
      */
     protected $fillable = [
-      'source',
+      'image',
       'name',
+    
     ];
+
 
     public function rankings(){
       return $this->hasMany(Rank::class, 'rank_category_id');
