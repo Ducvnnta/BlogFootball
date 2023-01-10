@@ -16,7 +16,7 @@ class CreateRankCategoriesTable extends Migration
         Schema::create('rank_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('source');
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->index(['name']);

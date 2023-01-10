@@ -16,7 +16,8 @@ class CreateScheduleCategoriesTable extends Migration
         Schema::create('schedule_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->index(['name']);

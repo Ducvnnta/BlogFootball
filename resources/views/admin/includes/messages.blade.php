@@ -1,6 +1,6 @@
 @if(session()->get('flash_success'))
     <div class="alert alert-success" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: black; margin-right:8px">
             <span aria-hidden="true">&times;</span>
         </button>
 

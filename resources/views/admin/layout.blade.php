@@ -122,7 +122,7 @@
     </script>
 
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-    {{-- <script src="backend/libs/js/main-js.js"></script> --}}
+    <script src="backend/libs/js/main-js.js"></script>
 </body>
 
 </html>

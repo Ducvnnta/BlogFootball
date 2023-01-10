@@ -37,6 +37,12 @@
 
                   <li class="nav-item ">
                     <a class    ="nav-link" href="{{ route('get.list.rank') }}">
+                      <i class="fab fa-fw fa-wpforms"></i>Giải đấu
+                      <span class="badge badge-success">6</span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class    ="nav-link" href="{{ route('get.list.rank') }}">
                       <i class="fab fa-fw fa-wpforms"></i>Bảng xếp hạng
                       <span class="badge badge-success">6</span>
                     </a>

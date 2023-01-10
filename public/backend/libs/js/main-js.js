@@ -116,6 +116,8 @@ jQuery(document).ready(function ($) {
 
 // });
 
+
+
 $(function () {
     $(".editor").each(function () {
         let id = $(this).attr("id");
@@ -177,14 +179,6 @@ $(function () {
 
 
 
-imgInp.onchange = (evt) => {
-    const [file] = imgInp.files;
-    if (file) {
-        blah.src = URL.createObjectURL(file);
-    }
-};
-
-
     // ==============================================================
     // Popup Preview Video
     // ==============================================================
@@ -216,9 +210,80 @@ imgInp.onchange = (evt) => {
     // document ready
 // });
 
+
+
     // ==============================================================
-    // Search List News Admin
+    // Upload Image
+    // ==============================================================
+
+    // imgInp.onchange = (evt) => {
+    //     const [file] = imgInp.files;
+    //     if (file) {
+    //         blah.src = URL.createObjectURL(file);
+    //     }
+    // };
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imagepreview1').prop('src', e.target.result).show();
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#input1").change(function () {
+        readURL(this);
+        $('#imagepreview1').show();
+    });
+
+    $("#input1").click(function () {
+
+        $('#imagepreview1').attr('src','');
+    });
+
+
+    $('#imagepreview1').click(function(){
+
+        $('#input1').replaceWith($('#input1').clone(true));
+        $('#imagepreview1').hide();
+
+    });
+    $('#cancel').click(function(e)
+    {
+        $('#input1').val("");
+        $('#imagepreview1').attr("","");
+    })
+
+    // ==============================================================
+    // Preview Upload Images
     // ==============================================================
 
 
+    $(function() {
+        // Multiple images preview in browser
+        var imagesPreview = function(input, placeToInsertImagePreview) {
 
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+        };
+
+        $('#gallery-photo-add').on('change', function() {
+            imagesPreview(this, 'div.gallery');
+        });
+    });
