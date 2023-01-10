@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg header-user">
+    <div class='container'>
     <a class="navbar-brand" href="/"><img src="./images/logo02.png" /></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,6 +95,7 @@
                             <i class="fas fa-user mr-2"></i>{{ $userName }}
                         </a>
                         <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
+                        <a class="dropdown-item" href="{{ route('auth.register') }}"><i class="fas fa-star mr-2"></i>Another Account</a>
                         <a class="dropdown-item" href="{{ route('auth.logout') }}"><i
                                 class="fas fa-power-off mr-2"></i>Logout</a>
 
@@ -115,6 +117,7 @@
     </div>
     </div>
 </nav>
+</div>
 <div class="search-box">
     <div class="container">
         <form class="search-form" role="search" method="GET" id="key" action="{{ route('home.search') }}">

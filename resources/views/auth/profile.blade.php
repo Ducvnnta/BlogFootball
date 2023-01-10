@@ -105,6 +105,7 @@
         <script src="OwlCarousel/dist/owl.carousel.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
         <section class="h-100 gradient-custom-2">
             <div class="container py-5 h-100">
                 <div>
@@ -118,7 +119,7 @@
                     <div class="col col-lg-9 col-xl-7">
                         <div class="card">
                             <div class="rounded-top text-white d-flex flex-row"
-                                style="background-color: #ebe6e6; height:200px;">
+                                style="background-color: #99b6ee; height:200px;">
                                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 215px; ">
                                     @if (!is_null($user->image))
                                         <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
@@ -128,23 +129,24 @@
                                         <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                             style="width: 150px; height: 215px; z-index: 1; border: 3px solid #121112;">
                                     @endif
-
-                                    @if (Auth::guard('admin')->check())
+                                    {{-- @php
+                                        dd(Auth::user()->is_admin);
+                                    @endphp --}}
+                                    @if (!is_null(Auth::user()->is_admin))
                                         <a href="{{ route('admin.edit.profile') }}">
                                             <button type="button" class="btn btn-outline-dark"
                                                 data-mdb-ripple-color="dark" style="z-index: 1;">
                                                 Edit profile
                                         </a>
-                                    @elseif (Auth::guard('web')->check())
+                                    @elseif (is_null(Auth::user()->is_admin))
                                         <a href="{{ route('auth.edit.profile') }}">
-
                                             <button type="button" class="btn btn-outline-dark"
                                                 data-mdb-ripple-color="dark" style="z-index: 1;">
                                                 Edit profile
                                         </a>
                                     @endif
                                 </div>
-                                @if (Auth::guard('admin')->check())
+                                @if (!is_null(Auth::user()->is_admin))
                                     @php
                                         $role = 'Quản trị viên';
                                     @endphp
@@ -160,52 +162,82 @@
                             </div>
                             <div class="p-4 text-black" style="background-color: #f8f9fa;">
                                 <div class="d-flex justify-content-end text-center py-1">
+
+                                    @if(!is_null(Auth::user()->is_admin))
                                     <div>
-                                        <p class="mb-1 h5">253</p>
-                                        <p class="small text-muted mb-0">Photos</p>
+                                        <p class="mb-1 h5">{{ count($admins) }}</p>
+                                        <p class="small text-muted mb-0">Admin</p>
                                     </div>
                                     <div class="px-3">
-                                        <p class="mb-1 h5">1026</p>
-                                        <p class="small text-muted mb-0">Followers</p>
+                                        <p class="mb-1 h5">{{ count($users) }}</p>
+                                        <p class="small text-muted mb-0">User</p>
                                     </div>
                                     <div>
-                                        <p class="mb-1 h5">478</p>
-                                        <p class="small text-muted mb-0">Following</p>
+                                        <p class="mb-1 h5">{{ count($newAlls) }}</p>
+                                        <p class="small text-muted mb-0">Total News</p>
                                     </div>
-
+                                    @elseif(is_null(Auth::user()->is_admin))
+                                    <div>
+                                        <p class="mb-1 h5">0</p>
+                                        <p class="small text-muted mb-0">Images</p>
+                                    </div>
+                                    <div class="px-3">
+                                        <p class="mb-1 h5">0</p>
+                                        <p class="small text-muted mb-0">Comments</p>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 h5">{{ count($totalNewsReads)}}</p>
+                                        <p class="small text-muted mb-0">Most View</p>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-body p-4 text-black">
                                 <div class="mb-5">
-                                    <p class="lead fw-normal mb-1">About</p>
+                                    <p class="lead fw-normal mb-1">About You</p>
                                     <div class="p-4" style="background-color: #f8f9fa;">
                                         <p class="font-italic mb-1">{{ $user->created_at }}</p>
                                         <p class="font-italic mb-2">{{ $user->email }}</p>
                                     </div>
                                 </div>
+
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <p class="lead fw-normal mb-0">Recent photos</p>
-                                    <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+
+                                    @if(!is_null(Auth::user()->is_admin))
+                                    <p class="mb-0"><a href="{{ route('admin.dashboard') }}" class="text-muted">Trang chủ</a></p>
+                                    @elseif(is_null(Auth::user()->is_admin))
+                                    <p class="mb-0"><a href="{{ route('web.home') }}" class="text-muted">Trang chủ</a></p>
+                                    @endif
                                 </div>
                                 <div class="row g-2">
+                                    @foreach ($newsLasts as $newsLast)
                                     <div class="col mb-2">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
+                                        <img src="{{ $newsLast->image_url }}"
                                             alt="image 1" class="w-100 rounded-3">
                                     </div>
+                                    @endforeach
+{{--
                                     <div class="col mb-2">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
                                             alt="image 1" class="w-100 rounded-3">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row g-2">
+                                    @foreach ($newsReads as $newsRead)
                                     <div class="col">
+                                        <img src="{{ $newsRead->image_url }}"
+                                            alt="image 1" class="w-100 rounded-3">
+                                    </div>
+                                    @endforeach
+                                    {{-- <div class="col">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
                                             alt="image 1" class="w-100 rounded-3">
                                     </div>
                                     <div class="col">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
                                             alt="image 1" class="w-100 rounded-3">
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

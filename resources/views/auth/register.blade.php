@@ -79,30 +79,37 @@
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-right: 10px;"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <input type="password" name="password" class="form-control"
+                                                    <div class="row" style="margin-left:2px; padding-right:14px">
+                                                        <input type="password" name="password" id="password" class="form-control"
                                                         placeholder="Password" />
+                                                        <i class="bi bi-eye-slash" id="togglePassword"></i>
                                                     @if ($errors->has('password'))
                                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                                     @endif
+                                                    </div>
+
                                                 </div>
                                             </div>
 
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-key fa-lg me-3 fa-fw" style="margin-right: 10px;"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <input type="password" name="confirm_password" class="form-control"
+                                                    <div class="row" style="margin-left:2px; padding-right:14px">
+                                                    <input type="confirm_password" name="confirm_password" id="confirmpassword" class="form-control"
                                                         placeholder="Confirm your password" />
+                                                         <i class="bi bi-eye-slash" id="togglePassword"></i>
                                                     @if ($errors->has('confirm_password'))
                                                         <span
                                                             class="text-danger">{{ $errors->first('confirm_password') }}</span>
                                                     @endif
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-check d-flex justify-content-center mb-5">
                                                 <input class="me-2" type="checkbox" value="" id="form2Example3c"
                                                     style="margin-right: 5px;" />
-                                                <label class="form-check-label" for="form2Example3">
+                                                <label class="form-check-label" for="form2Example3" style="margin-left: 2px">
                                                     I agree all statements in <a href="#!">Terms of service</a>
                                                 </label>
                                             </div>

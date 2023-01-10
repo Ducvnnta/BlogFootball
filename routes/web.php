@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\web\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaptureController;
@@ -26,26 +25,26 @@ use App\User;
 |
 */
 
-    Route::get('/113', function () {
-        return view("web.test");
-    });
-Route::get('detail', function () {
-    return view("web.detail");
-});
-Route::get('detailnews', function () {
-    return view("web.news.show");
-});
-Route::get('ranknew', function () {
-    return view("web.news.rank");
-});
+//     Route::get('/113', function () {
+//         return view("web.test");
+//     });
+// Route::get('detail', function () {
+//     return view("web.detail");
+// });
+// Route::get('detailnews', function () {
+//     return view("web.news.show");
+// });
+// Route::get('ranknew', function () {
+//     return view("web.news.rank");
+// });
 
-Route::get('register', function () {
-    return view('auth.register');
-})->name('auth.register');
+// Route::get('register', function () {
+//     return view('auth.register');
+// })->name('auth.register');
 
-Route::get('detail', function () {
-    return view('admin.news.detail');
-})->name('admin.detail');
+// Route::get('detail', function () {
+//     return view('admin.news.detail');
+// })->name('admin.detail');
 
 Route::get('/',  [HomeController::class, 'titlehot'])->name('web.home');
 Route::get('/tin-tuc/{id}', [NewController::class, 'show'])->name('web.news.show');
