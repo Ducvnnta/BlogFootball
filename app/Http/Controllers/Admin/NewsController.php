@@ -48,7 +48,12 @@ class NewsController extends BaseController
     public function detail($id)
     {
         $new = News::find($id);
-        return view('admin.news.detail', compact('new'));
+        $view =  $new->reads;
+        $comment = $new->whereHas('comments', function ($q)
+        {
+            $q->whereNotNull('comments.new_id');
+        })->count();
+        return view('admin.news.detail', compact('new', 'view', 'comment'));
     }
 
     public function store(CreateNewsRequest $request)

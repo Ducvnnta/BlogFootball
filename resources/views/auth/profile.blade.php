@@ -124,10 +124,10 @@
                                     @if (!is_null($user->image))
                                         <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                             src="{{ asset($user->image) }}" alt="profile_image"
-                                            style="width: 150px; height: 215px; z-index: 1; border: 3px solid #121112;">
+                                            style="width: 150px; height: 170px; z-index: 1; border: 3px solid #121112;">
                                     @else
                                         <img alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                            style="width: 150px; height: 215px; z-index: 1; border: 3px solid #121112;">
+                                            style="width: 150px; height: 170px; z-index: 1; border: 3px solid #121112;">
                                     @endif
                                     {{-- @php
                                         dd(Auth::user()->is_admin);

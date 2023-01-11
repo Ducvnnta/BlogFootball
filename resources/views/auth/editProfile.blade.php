@@ -235,27 +235,27 @@
                         </div>
                     </div>
 
-                        <div class="row py-2">
+                        {{-- <div class="row py-2">
 
                             <div class="col-md-6 pt-md-0 pt-3">
                                 <label for="phone">Password</label>
                                 <div class="row" style="margin-left: 2px">
 
-                                    <input type="password" name="password" class="bg-light form-control" id="password" style="padding-right: 23px"
-                                    placeholder="password"  minlength="8" required>
+                                    <input type="password" name="password" class="bg-light form-control" id="password" style="padding-right: 23px" value="{{ $user->password }}"
+                                    placeholder="password"  required>
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                 @if ($errors->has('password'))
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
                                 </div>
-                            </div>
+                            </div> --}}
                         {{-- <input type="password" name="confirm_password" class="form-control"
                 placeholder="Confirm your password" /> --}}
                         {{-- @if ($errors->has('confirm_password'))
                 <span
                     class="text-danger">{{ $errors->first('confirm_password') }}</span>
             @endif --}}
-                    </div>
+                    {{-- </div> --}}
                     {{-- <div class="row py-2">
                 <div class="col-md-6">
                     <label for="country">Country</label>
@@ -281,7 +281,7 @@
 
                     <div class="py-3 pb-4 border-bottom">
                         <button class="btn btn-success btn-submit btn-primary mr-3"
-                            action="{{ route('auth.edit.profile') }}">Save Changes</button>
+                            action="{{ route('auth.update.profile') }}">Save Changes</button>
                         <button class="btn border button">Cancel</button>
                     </div>
                 </div>

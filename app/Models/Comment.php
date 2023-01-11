@@ -24,6 +24,9 @@ class Comment extends Model
         'detail'
     ];
 
+    public $timestamps = TRUE;
+
+
     /**
      * The belongs to Relationship
      *

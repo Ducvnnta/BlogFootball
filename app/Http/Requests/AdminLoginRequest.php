@@ -25,7 +25,7 @@ class AdminLoginRequest extends FormRequest
     {
         return [
             'email' => 'required|email:rfc,dns|max:100',
-            'password' => 'required|min:3|max:100'
+            'password' => 'required|regex:/^[a-zA-Z0-9]+$/|min:6|max:16',
         ];
     }
 

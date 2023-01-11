@@ -39,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\RankCategories\RankCategoriesServiceInterface::class,
             \App\Services\RankCategories\RankCategoriesService::class,
         );
+
+        $this->app->bind(
+            \App\Services\Comments\CommentsServiceInterface::class,
+            \App\Services\Comments\CommentsService::class,
+        );
     }
 
     public function registerRepository() //admin
@@ -61,6 +66,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Repositories\RankCategories\RankCategoriesRepositoryInterface::class,
             \App\Repositories\RankCategories\RankCategoriesReponsitory::class,
+        );
+
+
+        $this->app->bind(
+            \App\Repositories\Comments\CommentsRepositoryInterface::class,
+            \App\Repositories\Comments\CommentsReponsitory::class,
         );
 
     }
