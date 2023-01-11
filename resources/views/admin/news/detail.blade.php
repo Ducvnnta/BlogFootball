@@ -74,7 +74,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="" class="text-muted"> 8 comments </a>
+                        <a href="" class="text-muted"> {{ $comment }} comments </a>
                     </div>
                 </div>
                 <!-- Reactions -->
@@ -97,10 +97,10 @@
 
                 <!-- Input -->
                 <div class="d-flex mb-3">
-                    <a href="">
+                    {{-- <a href="">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/18.webp" class="border rounded-circle me-2"
                             alt="Avatar" style="height: 40px" />
-                    </a>
+                    </a> --}}
                     <div class="form-outline w-100">
                         <textarea class="form-control" id="textAreaExample" rows="2"></textarea>
                         <label class="form-label" for="textAreaExample">Write a comment</label>

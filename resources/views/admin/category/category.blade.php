@@ -77,7 +77,7 @@
                                 <thead>
                                     <tr class="border-0">
                                         <th class="border-0 no-wrap">#</th>
-                                        <th class="border-0 no-wrap">Hình ảnh</th>
+                                        {{-- <th class="border-0 no-wrap">Hình ảnh</th> --}}
                                         <th class="border-0 no-wrap">Danh mục</th>
                                         <th class="border-0 no-wrap">Thể loại</th>
                                         <th class="border-0 no-wrap">Nguồn</th>
@@ -90,12 +90,12 @@
                                     @foreach ($categories as $key => $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <div class="m-r-10">
                                                     <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
                                                         class="rounded" width="45">
                                                 </div>
-                                            </td>
+                                            </td> --}}
                                             <td>{{ $item->name }}</td>
                                             <td class="no-wrap">{{ $item->slug }}</td>
                                             <td class="no-wrap"><span class="badge-dot badge-brand mr-1"></span>

@@ -19,7 +19,8 @@
         {{-- {!! Form::file('image_url', 'Ảnh thu nhỏ')->attrs(['class' => 'input-file']) !!} --}}
         <div class="form-group" style="margin-botttom: 12px">
             <label for="inp-image_url">Ảnh thu nhỏ</label>
-            <input class="form-control-file input-file" type="file" name="image_url" id="inp-image_url" value="{{ $news->image_url }}">
+
+            <input class="form-control-file input-file" type="file" name="image_url" id="inp-image_url" required>
             {{-- <span type="button" id="remove-news" style="margin-top: 10px; background-color:black">Cancel</span> --}}
 
             @if (isset($news))

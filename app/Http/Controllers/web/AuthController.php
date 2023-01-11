@@ -150,12 +150,14 @@ class AuthController
         if (!is_null($admin)) {
             return redirect()->route('admin.dashboard');
         } else if(!is_null($user)) {
-            $url = 'http://localhost:8001/admin';
-            if(session()->get('url.intended') === $url)
-            {
-                return redirect()->route('web.home');
-            }
-            return redirect(session()->get('url.intended'));
+            // $url = 'http://localhost:8001/admin';
+            // if(session()->get('url.intended') === $url)
+            // {
+            //     return redirect()->route('web.home');
+            // }
+            // return redirect(session()->get('url.intended'));
+            return redirect()->route('web.home');
+
         }
     }
 
@@ -200,7 +202,7 @@ class AuthController
         $array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         $code = Arr::random($array) . Arr::random($array) . Arr::random($array) . Arr::random($array);
         if ($token) {
-            session(['token' => $token]);
+            session(['email' => $request->email]);
         }
         $tokenSuccess = DB::table('password_resets')->insert([
             'email' => request('email'),
@@ -223,9 +225,8 @@ class AuthController
 
     public function resetCodePassword(CheckCodeResetRequest $request)
     {
-        $token = session()->get('token');
-        dd($token);
-        $passwordReset = PasswordReset::where('token', $token)->orderBy('id', 'DESC')->first();
+        $email = session()->get('email');
+        $passwordReset = PasswordReset::where('email', $email)->orderBy('id', 'DESC')->first();
         if ($passwordReset) {
             if ($passwordReset->code != $request->code) {
                 return redirect()->back()->with('error', 'Code không đúng hãy lấy code mới nhất !');

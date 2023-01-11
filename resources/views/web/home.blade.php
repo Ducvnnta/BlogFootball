@@ -34,7 +34,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col-6 new box-shadow">
+            <div class="col-6 new box-shadow" style="margin-top: 20px">
                 <div class="row no-gutters">
                     <div class="col-md-10 offset-md-1 newhome">
                         <div class="row no-gutters row-newhome">

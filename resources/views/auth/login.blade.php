@@ -32,7 +32,7 @@
                     @if (Session::has('error'))
                         <div class="alert alert-error" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true" style="margin-right: 40px; ">&times;</span>
                             </button>
                             {{ Session::get('error') }}
                             @php
@@ -52,7 +52,7 @@
                     {!! Form::open()->post()->route('auth.user.login') !!}
                     {!! Form::text('email')->type('email')->attrs(['class' => 'form-control-lg'])->placeholder('Email') !!}
                     {!! Form::text('password')->type('password')->attrs(['class' => 'form-control-lg', 'id'=> 'passLogin'])->placeholder('Password') !!}
-                    <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                    {{-- <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i> --}}
                     <div class="form-group">
                         <label class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" name="remember"><span
@@ -71,7 +71,7 @@
                     </a>
             </div> --}}
                 <div class="card-body">
-                    <a href="{{ route('user.registration') }}">
+                    <a href="{{ route('user.auth.register') }}">
                         <div class=" box-1">
                             <div class="btn btn-one">
                                 <span>Sign Up</span>

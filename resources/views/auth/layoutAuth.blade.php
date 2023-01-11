@@ -31,7 +31,7 @@
 
 <body>
     <style>
-            #togglePassword {
+    #togglePassword {
                 margin-top: 6px;
     /* color: black; */
     height: 22px;
@@ -68,13 +68,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
 
-            const togglePassword = document.querySelector('#togglePassword');
+        const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#password');
     const confirmpassword = document.querySelector('#confirmpassword');
 
     togglePassword.addEventListener('click', function (e) {
         // toggle the type attribute
-        
+
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
     // toggle the eye / eye slash icon

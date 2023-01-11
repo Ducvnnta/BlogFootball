@@ -7,9 +7,9 @@ use App\Http\Controllers\web\CategoryController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\NewController;
 use App\Http\Controllers\web\DayController;
+use App\Http\Controllers\web\Detailnewscontroller;
 use App\Http\Controllers\web\RankController;
 use App\Http\Controllers\web\ScheduleController;
-use App\Http\Controllers\web\detailnewscontroller;
 use App\Http\Controllers\web\UploadController;
 use App\Http\Controllers\web\UserController;
 use App\User;
@@ -54,8 +54,8 @@ Route::get('/lich-thi-dau/{id}',[ScheduleController::class, 'scheduledetail'])->
 
 Route::get('/giai-dau/{id}', [CategoryController::class, 'categorydetail'])->name('web.news.category');
 
+Route::get('/registration', [AuthController::class, 'registration'])->name('user.auth.register');
 Route::post('/register', [AuthController::class, 'register'])->name('user.registration');
-Route::get('/registration', [AuthController::class, 'registration'])->name('auth.register');
 
 Route::get('/reset', [AuthController::class, 'reset'])->name('web.reset.pass');
 Route::post('/reset', [AuthController::class, 'sendResetLinkEmail'])->name('auth.reset.pass');
@@ -77,8 +77,8 @@ Route::get('/profile', [AuthController::class, 'getMe'])->name('auth.profile');
 Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('auth.update.profile');
 Route::get('/edit-profile', [AuthController::class, 'edit'])->name('auth.edit.profile');
 
-
-
+Route::get('/comments', [Detailnewscontroller::class, 'comments'])->name('web.user.comments');
+Route::post('/post-comments/{newId}', [Detailnewscontroller::class, 'postComment'])->name('user.post.comments');
 
 Route::get('/profile/{id}', [AuthController::class, 'getMe'])->name('auth.profile');
 
